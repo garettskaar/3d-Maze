@@ -6,8 +6,10 @@
 	<meta name="generator" content="BBEdit 10.5" />
 
 <!-- load matrix manipulation helper methods -->	
-<script type="text/javascript" src="glMatrix_util.js"></script>
-<script type="text/javascript" src="webgl-utils.js"></script>
+	<script type="text/javascript" src="glMatrix_util.js"></script>
+	<script type="text/javascript" src="webgl-utils.js"></script>
+	<script type="text/javascript" src="handlers.js"></script>
+
 
 <!-- define our shaders -->
 	<script id="per-fragment-lighting-fs" type="x-shader/x-fragment">
@@ -514,6 +516,9 @@ function startHelloWebGL()
    initShaders();
    initGeometry();
    initTextures();
+
+    document.onkeydown = handleKeyDown;
+    document.onkeyup = handleKeyUp;
    
    gl.clearColor(0.0,0.0,0.0,1.0);
    //gl.clearColor(0.4,0.4,0.4,1.0);
@@ -537,7 +542,7 @@ function startHelloWebGL()
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
+        mat4.perspective(100, gl.viewportWidth / gl.viewportHeight, 0.1, 1000.0, pMatrix);
         var specularHighlights = document.getElementById("specular").checked;
         if (specularHighlights) {
             currentProgram = perFragmentProgram;
@@ -549,11 +554,12 @@ function startHelloWebGL()
 
         mat4.identity(mvMatrix);
 
-        mat4.translate(mvMatrix, [0.0, 0.0, -8.0]);
+        mat4.translate(mvMatrix, [0.0+yRot/100, 0.0, -8.0+xRot/100]);
+        //mat4.translate(mvMatrix, [shift, raise, zoom]);
 
         mat4.rotate(mvMatrix, xRot/180.0*3.1415, [1, 0, 0]);
-        mat4.rotate(mvMatrix, yRot/180.0*3.1415, [0, 1, 0]);
-        mat4.rotate(mvMatrix, zRot/180.0*3.1415, [0, 0, 1]);
+        //mat4.rotate(mvMatrix, yRot/180.0*3.1415, [0, 1, 0]);
+        mat4.rotate(mvMatrix, yRot/180.0*3.1415, [0, 0, 1]);
 
         //setting up all the check boxes
         var lighting = document.getElementById("lighting").checked;
@@ -641,9 +647,9 @@ function startHelloWebGL()
         if (lastTime != 0) {
             var elapsed = timeNow - lastTime;
 
-            //xRot += (90 * elapsed) / 1000.0;
-            yRot -= (90 * elapsed) / 10000.0;
-            //zRot += (90 * elapsed) / 10000.0;
+            xRot += 0 + pitchRate;
+            yRot -= 0 + yawRate;
+            //zRot += 0 + speed;
         }
         lastTime = timeNow;
     }
@@ -651,6 +657,7 @@ function startHelloWebGL()
 
     function Frames() {
         requestAnimFrame(Frames);
+        handleKeys();
         drawScene();
         animate();
     }
