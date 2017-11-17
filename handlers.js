@@ -11,8 +11,8 @@ var pitchRate = 0;
 var yaw = 0;
 var yawRate = 0;
 var xPos = 0;
-var yPos = 1.0;
-var zPos = 0;
+var yPos = 0;
+var zPos = 15;
 var speed = 0;
 
 var rotMatrix = mat4.create();
@@ -72,23 +72,27 @@ function handleKeys() {
 
     if (currentlyPressedKeys[40]) {
         // W
-        pitchRate += 0.1;
+        pitchRate += 0.05;
     } else if (currentlyPressedKeys[38]) {
         // D
+        pitchRate += -0.05;
+    } else if(pitchRate < -0.1) {
+        pitchRate += 0.1;
+    } else if(pitchRate > 0.1) {
         pitchRate += -0.1;
-    } else if(pitchRate < 0) {
-        pitchRate += 0.1
-    } else if(pitchRate > 0) {
-        pitchRate += -0.1
     } else {
         pitchRate = 0;
     }
 
-    if (currentlyPressedKeys[39]) {
+    if (currentlyPressedKeys[37]) {
         // Left cursor key
-        yawRate += 0.1;
-    } else if (currentlyPressedKeys[37]) {
+        yawRate += 0.05;
+    } else if (currentlyPressedKeys[39]) {
         // Right cursor key
+        yawRate += -0.05;
+    } else if(yawRate < -0.1) {
+        yawRate += 0.1;
+    } else if(yawRate > 0.1) {
         yawRate += -0.1;
     } else {
         yawRate = 0;
