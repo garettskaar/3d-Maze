@@ -70,10 +70,10 @@ function handleKeyUp(event) {
 
 function handleKeys() {
 
-    if (currentlyPressedKeys[40]) {
+    if (currentlyPressedKeys[87]) {
         // W
         pitchRate += 0.05;
-    } else if (currentlyPressedKeys[38]) {
+    } else if (currentlyPressedKeys[83]) {
         // D
         pitchRate += -0.05;
     } else if(pitchRate < -0.1) {
@@ -84,10 +84,10 @@ function handleKeys() {
         pitchRate = 0;
     }
 
-    if (currentlyPressedKeys[37]) {
+    if (currentlyPressedKeys[65]) {
         // Left cursor key
         yawRate += 0.05;
-    } else if (currentlyPressedKeys[39]) {
+    } else if (currentlyPressedKeys[68]) {
         // Right cursor key
         yawRate += -0.05;
     } else if(yawRate < -0.1) {
