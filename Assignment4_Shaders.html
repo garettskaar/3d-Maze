@@ -242,16 +242,16 @@
         var str = "";
         var k = shaderScript.firstChild;
         while (k) {
-            if (k.nodeType == 3) {
+            if (k.nodeType === 3) {
                 str += k.textContent;
             }
             k = k.nextSibling;
         }
 
         var shader;
-        if (shaderScript.type == "x-shader/x-fragment") {
+        if (shaderScript.type === "x-shader/x-fragment") {
             shader = gl.createShader(gl.FRAGMENT_SHADER);
-        } else if (shaderScript.type == "x-shader/x-vertex") {
+        } else if (shaderScript.type === "x-shader/x-vertex") {
             shader = gl.createShader(gl.VERTEX_SHADER);
         } else {
             return null;
@@ -344,7 +344,7 @@
     }
 
     function mvPopMatrix() {
-        if (mvMatrixStack.length == 0) {
+        if (mvMatrixStack.length === 0) {
             throw "Invalid popMatrix!";
         }
         mvMatrix = mvMatrixStack.pop();
@@ -407,8 +407,7 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, noiseValsBuffer);
 
         for (i = 0; i <= 1000; i++) {
-            var random = (Math.random() * 1.0);
-            noise[i] = random;
+            noise[i]  = (Math.random() * 1.0);
         }
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(noise), gl.STATIC_DRAW);
         noiseValsBuffer.itemSize = 1;
