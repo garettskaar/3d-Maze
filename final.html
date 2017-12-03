@@ -701,9 +701,9 @@
         //  Render Ball
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        mat4.translate(mvMatrix, [-xPos, yPos, -20.0 + zPos]);
+        mat4.translate(mvMatrix, [-xPos, yPos, -20.0 - zPos]);
         mat4.rotateX(mvMatrix, xRot / 180.0 * 3.1415);
-        mat4.rotateZ(mvMatrix, zRot / 180.0 * 3.1415);
+        mat4.rotateY(mvMatrix, zRot / 180.0 * 3.1415);
         //mat4.rotateY(mvMatrix, zRot / 180.0 * 3.1415);
 
         gl.activeTexture(gl.TEXTURE0);
@@ -769,10 +769,10 @@
         if (lastTime !== 0) {
             var elapsed = timeNow - lastTime;
 
-            xRot += pitchRate;
-            zRot += yawRate;
-            xPos = zRot/80.0;
-            zPos = xRot/80.0;
+            xRot -= pitchRate;
+            zRot -= yawRate;
+            xPos = zRot/5000.0;
+            zPos = xRot/5000.0;
             yPos = 0.0;
         }
         lastTime = timeNow;
