@@ -99,9 +99,9 @@ function handleKeys() {
     }
     if (currentlyPressedKeys[83]) {
         // Up cursor key
-        speed = 0.003;
+        speed = 0.0003;
     } else if (currentlyPressedKeys[87]) {
         // Down cursor key
-        speed = -0.003;
+        speed = -0.0003;
     }
 }
