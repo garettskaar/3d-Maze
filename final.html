@@ -605,9 +605,9 @@
     function getViewMatrix()
     {
         //sphere position
-        eye = [xPos,yPos,zPos];
+        eye = [xPos,yPos,zPos-20];
         //initial location you look at
-        initialD = [0.0,0.0,-20.0];
+        initialD = [0.0,0.0,0.0];
         //calculate adjusted target
         target = [eye[0]+initialD[0],eye[1]+initialD[1],eye[2]+initialD[2]];
         //up vector for lookat cam
@@ -703,8 +703,7 @@
 
         mat4.translate(mvMatrix, [-xPos, yPos, -20.0 - zPos]);
         mat4.rotateX(mvMatrix, xRot / 180.0 * 3.1415);
-        mat4.rotateY(mvMatrix, zRot / 180.0 * 3.1415);
-        //mat4.rotateY(mvMatrix, zRot / 180.0 * 3.1415);
+
 
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, exTexture);
@@ -743,6 +742,7 @@
         // Look At Matrix, needs work.......
         ////////////////////////////////////////////
         avm = getViewMatrix();
+        mat4.rotateY(avm, (zRot / 180.0 * 3.1415));
         mat4.multiply(mvMatrix,avm);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, gridVertexPositionBuffer);
