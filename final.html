@@ -9,6 +9,7 @@
     <script type="text/javascript" src="glMatrix_util.js"></script>
     <script type="text/javascript" src="webgl-utils.js"></script>
     <script type="text/javascript" src="handlers.js"></script>
+    <script type="text/javascript" src="maze.js"></script>
 
 
     <!-- define our shaders -->
@@ -392,11 +393,28 @@
         var diff = max - min;
         var max100 = 99;
         var min1 = -1;
+        var maze = getMaze();
+        console.log(maze.length);
+        var wallHeight = 20.0;
+
 
         for (i = 0; i < 100; i++) {
             for (j = 0; j < 100; j++) {
+
                 x = (i * diff) / max100 + min1;
-                y = 1.0;
+                if(maze[((i * diff) / max100 + min1)] == 1)
+                {
+                    y = wallHeight;
+                }
+                else if(maze[((j * diff) / max100 + min1)] == 1)
+                {
+                    y = wallHeight;
+                }
+                else
+                {
+                    y = 0.0;
+                }
+
                 z = (j * diff) / max100 + min1;
 
                 gridVertices.push(
@@ -461,9 +479,9 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Sphere Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        var latitudeBands = 30;
-        var longitudeBands = 30;
-        var radius = 2;
+        var latitudeBands = 20;
+        var longitudeBands = 20;
+        var radius = 1;
 
         var vertexPositionData = [];
         var normalData = [];
@@ -605,9 +623,9 @@
     function getViewMatrix()
     {
         //sphere position
-        eye = [xPos,yPos,zPos-20];
+        eye = [xPos,yPos,zPos];
         //initial location you look at
-        initialD = [0.0,0.0,0.0];
+        initialD = [0.0,0.0,-10];
         //calculate adjusted target
         target = [eye[0]+initialD[0],eye[1]+initialD[1],eye[2]+initialD[2]];
         //up vector for lookat cam
@@ -701,7 +719,7 @@
         //  Render Ball
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        mat4.translate(mvMatrix, [-xPos, yPos, -20.0 - zPos]);
+        mat4.translate(mvMatrix, [-xPos, yPos, -5.0 - zPos]);
         mat4.rotateX(mvMatrix, xRot / 180.0 * 3.1415);
 
 
@@ -735,8 +753,8 @@
         gl.bindTexture(gl.TEXTURE_2D, gridTexture);
         gl.uniform1i(currentProgram.samplerUniform, 0);
 
-        mat4.scale(mvMatrix, [100,1,100]);
-        mat4.translate(mvMatrix, [0, -3, 0]);
+        mat4.scale(mvMatrix, [50,1,50]);
+        mat4.translate(mvMatrix, [0, -3.0, 0.0]);
 
         ////////////////////////////////////////////
         // Look At Matrix, needs work.......
