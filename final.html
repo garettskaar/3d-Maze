@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Assignment4: Shaders</title>
+    <title>Final Project</title>
     <meta name="generator" content="BBEdit 10.5"/>
 
     <!-- load matrix manipulation helper methods -->
@@ -395,9 +395,9 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Floor Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        var floorPositions = [-20, 0, -20, -20, 0, 20, 20, 0, 20, -20, 0, -20, 20, 0, -20, 20, 0, 20];
-        var floorTextureCoords = [0, 20, 0, 0, 20, 0, 0, 20, 20, 20, 20, 0];
+        var floorSize = 7.0;
+        var floorPositions = [-floorSize, 0, -floorSize, -floorSize, 0, floorSize, floorSize, 0, floorSize, -floorSize, 0, -floorSize, floorSize, 0, -floorSize, floorSize, 0, floorSize];
+        var floorTextureCoords = [0, floorSize, 0, 0, floorSize, 0, 0, floorSize, floorSize, floorSize, floorSize, 0];
 
         floorVertexPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexPositionBuffer);
@@ -499,7 +499,7 @@
         exTexture.image.onload = function () {
             handleLoadedTexture(exTexture)
         };
-        exTexture.image.src = "deathstar2.png";
+        exTexture.image.src = "steel.png";
 
         // Floor Texture
         floorTexture = gl.createTexture();
@@ -614,25 +614,20 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         var lighting = document.getElementById("lighting").checked;
         var bumpMap = document.getElementById("bumpMap").checked;
-        var flat = document.getElementById("flat").checked;
 
         gl.uniform1i(currentProgram.showSpecularHighlightsUniform, specularHighlights);
         gl.uniform1i(currentProgram.useBumpMapUniform, bumpMap);
         gl.uniform1i(currentProgram.useLightingUniform, lighting);
-        gl.uniform1i(currentProgram.useFlatUniform, flat);
 
         if (lighting || specularHighlights) {
             gl.uniform3f(
-                currentProgram.ambientColorUniform,
-                parseFloat(document.getElementById("ambientR").value),
-                parseFloat(document.getElementById("ambientG").value),
-                parseFloat(document.getElementById("ambientB").value)
+                currentProgram.ambientColorUniform,0.5,0.5,0.5
             );
 
             var lightingDirection = [
-                parseFloat(document.getElementById("lightDirectionX").value),
-                parseFloat(document.getElementById("lightDirectionY").value),
-                parseFloat(document.getElementById("lightDirectionZ").value)
+                -0.25,
+                -0.25,
+                -1.0
             ];
             var adjustedLD = vec3.create();
             vec3.normalize(lightingDirection, adjustedLD);
@@ -641,9 +636,7 @@
 
             gl.uniform3f(
                 currentProgram.directionalColorUniform,
-                parseFloat(document.getElementById("directionalR").value),
-                parseFloat(document.getElementById("directionalG").value),
-                parseFloat(document.getElementById("directionalB").value)
+                0.8,0.8,0.8
             );
 
             //light location
@@ -655,7 +648,7 @@
         }
 
         //shininess of specular light reflection
-        gl.uniform1f(currentProgram.materialShininessUniform, parseFloat(document.getElementById("shininess").value));
+        gl.uniform1f(currentProgram.materialShininessUniform, 16.0);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Render Floor and Walls
@@ -780,46 +773,8 @@
 <input type="checkbox" id="lighting" unchecked/> Use Directional lighting<br/>
 <input type="checkbox" id="specular" unchecked/> Show Specular Highlights (Phong Shading)<br/>
 <input type="checkbox" id="bumpMap" unchecked/> Bump Map<br/>
-<input type="checkbox" id="math" unchecked/> Fibonacci(Not working at the moment...)<br/>
-<input type="checkbox" id="noise" unchecked/> Noise(Not working at the moment...)<br/>
-<input type="checkbox" id="flat" unchecked/> Flat Shading (Disco Ball!)<br/>
 
-<h2>Material (For Specular Highlights)</h2>
 
-<table style="border: 0; padding: 10px;">
-    <tr>
-        <td><b>Shininess:</b>
-        <td><input type="text" id="shininess" value="16.0"/>
-    </tr>
-</table>
-
-<h2>Directional light:</h2>
-
-<table style="border: 0; padding: 10px;">
-    <tr>
-        <td><b>Direction:</b>
-        <td>X: <input type="text" id="lightDirectionX" value="-0.25"/>
-        <td>Y: <input type="text" id="lightDirectionY" value="-0.25"/>
-        <td>Z: <input type="text" id="lightDirectionZ" value=" -1.0"/>
-    </tr>
-    <tr>
-        <td><b>Colour:</b>
-        <td>R: <input type="text" id="directionalR" value="0.8"/>
-        <td>G: <input type="text" id="directionalG" value="0.8"/>
-        <td>B: <input type="text" id="directionalB" value="0.8"/>
-    </tr>
-</table>
-
-<h2>Ambient light:</h2>
-<table style="border: 0; padding: 10px;">
-    <tr>
-        <td><b>Colour:</b>
-        <td>R: <input type="text" id="ambientR" value="0.5"/>
-        <td>G: <input type="text" id="ambientG" value="0.5"/>
-        <td>B: <input type="text" id="ambientB" value="0.5"/>
-    </tr>
-</table>
-<br/>
 Author: Garett Skaar & Jordin Rausch
 <br/>
 Sources used: http://learningwebgl.com/blog/
