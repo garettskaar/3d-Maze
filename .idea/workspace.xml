@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0470a964-9788-4fd7-a47b-e18979246e01" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/handlers.js" afterPath="$PROJECT_DIR$/handlers.js" />
-    </list>
+    <list default="true" id="0470a964-9788-4fd7-a47b-e18979246e01" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -17,35 +14,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Assignment4_Shaders.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
+      <file leaf-file-name="final.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/final.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-88">
-              <caret line="764" column="102" lean-forward="false" selection-start-line="764" selection-start-column="69" selection-end-line="764" selection-end-column="102" />
-              <folding>
-                <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-                <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-              </folding>
+            <state relative-caret-position="488">
+              <caret line="684" column="45" lean-forward="false" selection-start-line="684" selection-start-column="45" selection-end-line="684" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="glMatrix_util.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/glMatrix_util.js">
+      <file leaf-file-name="maze.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/maze.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3225">
-              <caret line="215" column="4" lean-forward="false" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="4" />
+            <state relative-caret-position="1066">
+              <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -54,7 +37,7 @@
       <file leaf-file-name="handlers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handlers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
+            <state relative-caret-position="1564">
               <caret line="92" column="31" lean-forward="true" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
               <folding />
             </state>
@@ -87,6 +70,8 @@
         <option value="$PROJECT_DIR$/glMatrix_util.js" />
         <option value="$PROJECT_DIR$/Assignment4_Shaders.html" />
         <option value="$PROJECT_DIR$/handlers.js" />
+        <option value="$PROJECT_DIR$/maze.js" />
+        <option value="$PROJECT_DIR$/final.html" />
       </list>
     </option>
   </component>
@@ -158,6 +143,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="0470a964-9788-4fd7-a47b-e18979246e01" name="Default" comment="" />
@@ -177,18 +165,20 @@
       <workItem from="1510886205092" duration="245000" />
       <workItem from="1510886520053" duration="6994000" />
       <workItem from="1510934857583" duration="1416000" />
+      <workItem from="1512661076345" duration="5994000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43557000" />
+    <option name="totallyTimeSpent" value="49551000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="54" y="22" width="1637" height="1028" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0996904" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08385417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -216,28 +206,23 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
+    <entry file="file://$PROJECT_DIR$/glMatrix_util.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/handlers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="92" column="31" lean-forward="true" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
     <entry file="file://$PROJECT_DIR$/glMatrix_util.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3225">
@@ -254,28 +239,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
     <entry file="file://$PROJECT_DIR$/glMatrix_util.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3225">
@@ -292,28 +256,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
     <entry file="file://$PROJECT_DIR$/glMatrix_util.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3225">
@@ -330,28 +273,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
     <entry file="file://$PROJECT_DIR$/handlers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1275">
@@ -360,73 +282,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
     <entry file="file://$PROJECT_DIR$/Shaders_A4.html" />
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14275">
-          <caret line="571" column="45" lean-forward="true" selection-start-line="571" selection-start-column="45" selection-end-line="571" selection-end-column="45" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
     <entry file="file://$PROJECT_DIR$/Shaders_A4.html" />
     <entry file="file://$PROJECT_DIR$/Shaders_A4.html" />
     <entry file="file://$PROJECT_DIR$/Shaders_A4.html" />
@@ -438,41 +297,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Shaders_A4_addingspec.html" />
     <entry file="file://$PROJECT_DIR$/Shaders_A4.html" />
+    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html" />
     <entry file="file://$PROJECT_DIR$/glMatrix_util.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3225">
+        <state relative-caret-position="1191">
           <caret line="215" column="4" lean-forward="false" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/maze.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1066">
+          <caret line="81" column="25" lean-forward="true" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/handlers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
+        <state relative-caret-position="1564">
           <caret line="92" column="31" lean-forward="true" selection-start-line="92" selection-start-column="31" selection-end-line="92" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assignment4_Shaders.html">
+    <entry file="file://$PROJECT_DIR$/final.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
-          <caret line="764" column="102" lean-forward="false" selection-start-line="764" selection-start-column="69" selection-end-line="764" selection-end-column="102" />
-          <folding>
-            <marker date="1510893994799" expanded="true" signature="1033:2354" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1122:1383" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1397:2348" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="1631:1903" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2808:3497" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="2980:3425" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3433:3490" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3812:4129" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="3919:4040" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4709:5606" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4857:4910" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4920:5599" ph="{...}" />
-            <marker date="1510893994799" expanded="true" signature="4996:5340" ph="{...}" />
-          </folding>
+        <state relative-caret-position="488">
+          <caret line="684" column="45" lean-forward="false" selection-start-line="684" selection-start-column="45" selection-end-line="684" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
