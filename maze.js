@@ -128,115 +128,59 @@ function pushVerticalTexCoords(vertexTextureCoords){
     );
 }
 //Builds maze geometery.
+// function buildMaze(m) {
+//     var vertexPositions = [];
+//     var vertexTextureCoords = [];
+//     var h = m.x / 2.0;
+//     for (var j = 0.0; j < m.x * 2.0 + 1.0; j++) {
+//         if (0.0 == j % 2) {
+//             for (var k = 0.0; k < m.y; k++) {
+//                 if (k > 0 || j > 0) { // "-"
+//                     pushHorizontalVerticies(vertexPositions, k - h, 0.0, (j - 1.0) / 2.0 - h);
+//                     pushHorizontalTexCoords(vertexTextureCoords);
+//                 }
+//             }
+//         } else {
+//             for (var k = 0.0; k < m.y + 1; k++) {
+//                 if (j != m.x * 2 - 1 || k != m.y) { // |
+//                     pushVerticalVerticies(vertexPositions, k - h, 0.0, (j - 2.0) / 2.0 - h);
+//                     pushVerticalTexCoords(vertexTextureCoords);
+//                 }
+//             }
+//         }
+//     }
+//
+//     return {p: vertexPositions, t: vertexTextureCoords,};
+// }
+
 function buildMaze(m) {
     var vertexPositions = [];
     var vertexTextureCoords = [];
-    var h = m.x / 2.0;
-    for (var j = 0.0; j < m.x * 2.0 + 1.0; j++) {
-        if (0.0 == j % 2) {
-            for (var k = 0.0; k < m.y; k++) {
-                if (k > 0 || j > 0) { // "-"
+    var h = m.x / 2;
+    for (var j = 0; j < m.x * 2 + 1; j++) {
+        var line = [];
+        if (0 == j % 2) {
+            for (var k = 0; k < m.y; k++) {
+                if (j > 0 && m.verti[j / 2 - 1][Math.floor(k)]) { // " "
+                    line[k] = ' ';
+                } else if (k > 0 || j > 0) { // "-"
                     pushHorizontalVerticies(vertexPositions, k - h, 0.0, (j - 1.0) / 2.0 - h);
                     pushHorizontalTexCoords(vertexTextureCoords);
                 }
             }
         } else {
-            for (var k = 0.0; k < m.y + 1; k++) {
-                if (j != m.x * 2 - 1 || k != m.y) { // |
+            for (var k = 0; k < m.y + 1; k++) {
+                if (k > 0 && m.horiz[(j - 1) / 2][k - 1]) {
+                    line[k] = ' ';
+                } else if (j != m.x * 2 - 1 || k != m.y) { // |
                     pushVerticalVerticies(vertexPositions, k - h, 0.0, (j - 2.0) / 2.0 - h);
                     pushVerticalTexCoords(vertexTextureCoords);
                 }
             }
         }
     }
-
-    return {p: vertexPositions, t: vertexTextureCoords,};
+    return {
+        p: vertexPositions,
+        t: vertexTextureCoords
+    };
 }
-
-var gridVertexPositionBuffer;
-var gridVertexTextureCoordinateBuffer;
-var gridVertexIndexBuffer;
-var gridNormalBuffer;
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//  Initialize Grid Geometry
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//        gridVertexPositionBuffer = gl.createBuffer();
-//        gl.bindBuffer(gl.ARRAY_BUFFER, gridVertexPositionBuffer);
-//        var gridVertices = [];
-//        var gridNormals = [];
-//
-//        var max = 1.0;
-//        var min = -1.0;
-//        var diff = max - min;
-//        var max100 = 99;
-//        var min1 = -1;
-//        var wallHeight = 20.0;
-//
-//
-//        for (i = 0; i < 100; i++) {
-//            for (j = 0; j < 100; j++) {
-//
-//                x = (i * diff) / max100 + min1;
-//
-//                y = 0.0;
-//
-//                z = (j * diff) / max100 + min1;
-//
-//                gridVertices.push(
-//                    x, y, z
-//                );
-//
-//                gridNormals.push(
-//                    0, y, 0
-//                );
-//            }
-//        }
-//        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(gridVertices), gl.STATIC_DRAW);
-//        gridVertexPositionBuffer.itemSize = 3;
-//        gridVertexPositionBuffer.numItems = gridVertices.length / 3;
-//
-//        gridNormalBuffer = gl.createBuffer();
-//        gl.bindBuffer(gl.ARRAY_BUFFER, gridNormalBuffer);
-//
-//        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(gridNormals), gl.STATIC_DRAW);
-//        gridNormalBuffer.itemSize = 3;
-//        gridNormalBuffer.numItems = gridNormals.length / 3;
-//
-//        gridVertexTextureCoordinateBuffer = gl.createBuffer();
-//        gl.bindBuffer(gl.ARRAY_BUFFER, gridVertexTextureCoordinateBuffer);
-//        var textureCoordinates = [];
-//        // Top face
-//
-//        var tc = 0;
-//        for (i = 0; i < 100; i++) {
-//            for (j = 0; j < 100; j++) {
-//                textureCoordinates[tc++] = 0.0 + (i * 1.0) / 99;
-//                textureCoordinates[tc++] = 0.0 + (j * 1.0) / 99;
-//
-//            }
-//        }
-//
-//        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoordinates), gl.STATIC_DRAW);
-//        gridVertexTextureCoordinateBuffer.itemSize = 2;
-//        gridVertexTextureCoordinateBuffer.numItems = textureCoordinates.length / 2;
-//
-//        gridVertexIndexBuffer = gl.createBuffer();
-//        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gridVertexIndexBuffer);
-//        var gridVertexIndices = [];
-//
-//        var gvi = 0;
-//        for (i = 0; i < 99; i++) {
-//            for (j = 0; j < 99; j++) {
-//                gridVertexIndices[gvi++] = 0 + j + i * 100;
-//                gridVertexIndices[gvi++] = 1 + j + i * 100;
-//                gridVertexIndices[gvi++] = 0 + j + (i + 1) * 100;
-//
-//                gridVertexIndices[gvi++] = 0 + j + (i + 1) * 100;
-//                gridVertexIndices[gvi++] = 1 + j + (i + 1) * 100;
-//                gridVertexIndices[gvi++] = 1 + j + i * 100;
-//            }
-//        }
-//
-//        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(gridVertexIndices), gl.STATIC_DRAW);
-//        gridVertexIndexBuffer.itemSize = 1;
-//        gridVertexIndexBuffer.numItems = gridVertexIndices.length;

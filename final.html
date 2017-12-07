@@ -370,7 +370,7 @@
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        maze = maze(5,5);
+        maze = maze(7,7);
         console.log(display(maze));
         walls = buildMaze(maze);
 
@@ -507,7 +507,7 @@
         floorTexture.image.onload = function () {
             handleLoadedTextureNoMips(floorTexture)
         };
-        floorTexture.image.src = "steel.png";
+        floorTexture.image.src = "ground.png";
 
         // Floor Texture
         boxTexture = gl.createTexture();
@@ -515,7 +515,7 @@
         boxTexture.image.onload = function () {
             handleLoadedTextureNoMips(boxTexture)
         };
-        boxTexture.image.src = "box.png";
+        boxTexture.image.src = "brick2.png";
     }
 
     function handleLoadedTexture(texture) {
@@ -667,7 +667,7 @@
         //mat4.rotate(mvMatrix, degToRad(-xPos), [1, 0, 0]);
         //mat4.rotate(mvMatrix, degToRad(-zPos), [0, 1, 0]);
 
-        mat4.translate(mvMatrix, [-xPos, -0.5-yPos, -zPos]);
+        mat4.translate(mvMatrix, [-xPos, -2.5-yPos, -zPos]);
 
 
         gl.activeTexture(gl.TEXTURE0);
@@ -687,8 +687,6 @@
         gl.bindTexture(gl.TEXTURE_2D, floorTexture);
         gl.uniform1i(currentProgram.samplerUniform, 0);
 
-
-       //mat4.translate(mvMatrix, [-xPos, -.5 -yPos, -zPos]);
 
        //  ////////////////////////////////////////////
        //  // Look At Matrix, needs work.......
