@@ -128,30 +128,6 @@ function pushVerticalTexCoords(vertexTextureCoords){
     );
 }
 //Builds maze geometery.
-// function buildMaze(m) {
-//     var vertexPositions = [];
-//     var vertexTextureCoords = [];
-//     var h = m.x / 2.0;
-//     for (var j = 0.0; j < m.x * 2.0 + 1.0; j++) {
-//         if (0.0 == j % 2) {
-//             for (var k = 0.0; k < m.y; k++) {
-//                 if (k > 0 || j > 0) { // "-"
-//                     pushHorizontalVerticies(vertexPositions, k - h, 0.0, (j - 1.0) / 2.0 - h);
-//                     pushHorizontalTexCoords(vertexTextureCoords);
-//                 }
-//             }
-//         } else {
-//             for (var k = 0.0; k < m.y + 1; k++) {
-//                 if (j != m.x * 2 - 1 || k != m.y) { // |
-//                     pushVerticalVerticies(vertexPositions, k - h, 0.0, (j - 2.0) / 2.0 - h);
-//                     pushVerticalTexCoords(vertexTextureCoords);
-//                 }
-//             }
-//         }
-//     }
-//
-//     return {p: vertexPositions, t: vertexTextureCoords,};
-// }
 
 function buildMaze(m) {
     var vertexPositions = [];

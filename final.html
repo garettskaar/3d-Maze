@@ -550,9 +550,14 @@
         initShaders();
         initGeometry();
         initTextures();
+        var acanvas = document.getElementById("hellowebgl");
 
+        acanvas.onmousedown = handleMouseDown;
+        document.onmouseup = handleMouseUp;
+        document.onmousemove = handleMouseMove;
         document.onkeydown = handleKeyDown;
         document.onkeyup = handleKeyUp;
+
 
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
         //gl.clearColor(0.4,0.4,0.4,1.0);
@@ -567,7 +572,7 @@
     function getViewMatrix()
     {
         //sphere position
-        eye = [xPos,yPos,zPos];
+        eye = [xPos,yPos+0.5,zPos];
         //initial location you look at
         initialD = [0.0,0.0,-10];
         //calculate adjusted target
@@ -587,6 +592,18 @@
     // finally we call the gl draw methods to draw our defined geometry objects.
     var xRot = 0;
     var zRot = 0;
+    //camera variables (initial)
+    var xPos = 0.0;
+    var yPos = 0.11;
+    var zPos = 0.0;
+
+    var horizontal = 0;
+    var vertical = 0;
+
+
+    var speed = 0;
+
+
 
     function drawScene() {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -660,7 +677,11 @@
         //mat4.rotate(mvMatrix, degToRad(-xPos), [1, 0, 0]);
         //mat4.rotate(mvMatrix, degToRad(-zPos), [0, 1, 0]);
 
-        mat4.translate(mvMatrix, [-xPos, -2.5-yPos, -zPos]);
+        //mat4.translate(mvMatrix, [-xPos, -2.5-yPos, -zPos]);
+
+        mat4.rotate(mvMatrix, -horizontal, [0, 1, 0]);
+        avm = getViewMatrix();
+        mat4.multiply(mvMatrix,avm);
 
 
         gl.activeTexture(gl.TEXTURE0);
@@ -681,9 +702,9 @@
         gl.uniform1i(currentProgram.samplerUniform, 0);
 
 
-       //  ////////////////////////////////////////////
-       //  // Look At Matrix, needs work.......
-       //  ////////////////////////////////////////////
+       //////////////////////////////////////////////
+       //// Look At Matrix, needs work.......
+       //////////////////////////////////////////////
 
 
         gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexPositionBuffer);
@@ -702,9 +723,7 @@
 
         mat4.identity(mvMatrix);
 
-        avm = getViewMatrix();
-        mat4.rotateY(avm, (zRot / 180.0 * 3.1415));
-        mat4.multiply(mvMatrix,avm);
+
 
         mat4.translate(mvMatrix, [-xPos, yPos, -5.0 - zPos]);
        // mat4.rotateX(mvMatrix, xRot / 180.0 * 3.1415);
@@ -732,14 +751,14 @@
 
     function animate() {
         var timeNow = new Date().getTime();
-        if (lastTime !== 0) {
+        if (lastTime != 0) {
             var elapsed = timeNow - lastTime;
+            //handles movement and direction change
+            if (speed != 0) {
+                xPos -= Math.sin(horizontal) * speed * elapsed;
+                zPos -= Math.cos(horizontal) * speed * elapsed;
+            }
 
-            xRot -= pitchRate;
-            zRot -= yawRate;
-            xPos = zRot/5000.0;
-            zPos = xRot/5000.0;
-            yPos = 0.0;
         }
         lastTime = timeNow;
     }
