@@ -315,12 +315,12 @@
     }
 
     var currentProgram;
-    var shaderProgram;
+    var currentProgram;
     var perFragmentProgram;
 
 
     function initShaders() {
-        shaderProgram = createProgram("shader-fs", "shader-vs");
+        currentProgram = createProgram("shader-fs", "shader-vs");
         perFragmentProgram = createProgram("per-fragment-lighting-fs", "per-fragment-lighting-vs");
     }
 
@@ -489,7 +489,8 @@
     }
 
     var exTexture;
-    var gridTexture;
+    var floorTexture;
+    var boxTexture;
 
     function initTextures() {
         // Ball Texture
@@ -501,12 +502,20 @@
         exTexture.image.src = "deathstar2.png";
 
         // Floor Texture
-        gridTexture = gl.createTexture();
-        gridTexture.image = new Image();
-        gridTexture.image.onload = function () {
-            handleLoadedTextureNoMips(gridTexture)
+        floorTexture = gl.createTexture();
+        floorTexture.image = new Image();
+        floorTexture.image.onload = function () {
+            handleLoadedTextureNoMips(floorTexture)
         };
-        gridTexture.image.src = "box.png";
+        floorTexture.image.src = "steel.png";
+
+        // Floor Texture
+        boxTexture = gl.createTexture();
+        boxTexture.image = new Image();
+        boxTexture.image.onload = function () {
+            handleLoadedTextureNoMips(boxTexture)
+        };
+        boxTexture.image.src = "box.png";
     }
 
     function handleLoadedTexture(texture) {
@@ -596,7 +605,7 @@
         if (specularHighlights) {
             currentProgram = perFragmentProgram;
         } else {
-            currentProgram = shaderProgram;
+            currentProgram = currentProgram;
         }
         gl.useProgram(currentProgram);
 
@@ -652,16 +661,17 @@
         //  Render Floor and Walls
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
         mat4.identity(mvMatrix);
 
-        mat4.rotate(mvMatrix, mvMatrix, degToRad(-xPos), [1, 0, 0]);
-        mat4.rotate(mvMatrix, mvMatrix, degToRad(-zPos), [0, 1, 0]);
+        //mat4.rotate(mvMatrix, degToRad(-xPos), [1, 0, 0]);
+        //mat4.rotate(mvMatrix, degToRad(-zPos), [0, 1, 0]);
 
-        mat4.translate(mvMatrix, [-xPos, -yPos, -zPos]);
+        mat4.translate(mvMatrix, [-xPos, -0.5-yPos, -zPos]);
 
 
         gl.activeTexture(gl.TEXTURE0);
-        gl.bindTexture(gl.TEXTURE_2D, gridTexture);
+        gl.bindTexture(gl.TEXTURE_2D, boxTexture);
         gl.uniform1i(currentProgram.samplerUniform, 0);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexPositionBuffer);
@@ -673,23 +683,17 @@
         setMatrixUniforms();
         gl.drawArrays(gl.TRIANGLES, 0, wallVertexPositionBuffer.numItems);
 
-        //mvPushMatrix();
-
-        //mat4.identity(mvMatrix);
-
         gl.activeTexture(gl.TEXTURE0);
-        gl.bindTexture(gl.TEXTURE_2D, gridTexture);
+        gl.bindTexture(gl.TEXTURE_2D, floorTexture);
         gl.uniform1i(currentProgram.samplerUniform, 0);
 
 
-        mat4.translate(mvMatrix, [-xPos, -.5 -yPos, -zPos]);
+       //mat4.translate(mvMatrix, [-xPos, -.5 -yPos, -zPos]);
 
-        ////////////////////////////////////////////
-        // Look At Matrix, needs work.......
-        ////////////////////////////////////////////
-        avm = getViewMatrix();
-        mat4.rotateY(avm, (zRot / 180.0 * 3.1415));
-        mat4.multiply(mvMatrix,avm);
+       //  ////////////////////////////////////////////
+       //  // Look At Matrix, needs work.......
+       //  ////////////////////////////////////////////
+
 
         gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexPositionBuffer);
         gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, floorVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
@@ -707,7 +711,11 @@
 
         mat4.identity(mvMatrix);
 
-        mat4.translate(mvMatrix, [-xPos, yPos, -10.0 - zPos]);
+        avm = getViewMatrix();
+        mat4.rotateY(avm, (zRot / 180.0 * 3.1415));
+        mat4.multiply(mvMatrix,avm);
+
+        mat4.translate(mvMatrix, [-xPos, yPos, -5.0 - zPos]);
        // mat4.rotateX(mvMatrix, xRot / 180.0 * 3.1415);
 
         gl.activeTexture(gl.TEXTURE0);
@@ -727,7 +735,6 @@
         setMatrixUniforms();
         gl.drawElements(gl.TRIANGLES, sphereVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 
-        //mvPopMatrix();
     }
 
     var lastTime = 0;
@@ -739,8 +746,8 @@
 
             xRot -= pitchRate;
             zRot -= yawRate;
-            xPos = zRot/500.0;
-            zPos = xRot/500.0;
+            xPos = zRot/5000.0;
+            zPos = xRot/5000.0;
             yPos = 0.0;
         }
         lastTime = timeNow;
