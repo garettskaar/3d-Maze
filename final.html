@@ -22,11 +22,6 @@
 
     uniform float uMaterialShininess;
 
-    uniform bool uShowSpecularHighlights;
-    uniform bool uUseLighting;
-    uniform bool uUseBumpMap;
-
-
     uniform vec3 uAmbientColor;
 
     uniform vec3 uPointLightingLocation;
@@ -45,18 +40,18 @@
         vec3 normal = normalize(vTransformedNormal);
 
         float specularLightWeighting = 0.0;
-        if (uShowSpecularHighlights){
-                vec3 eyeDirection = normalize(-vPosition.xyz);
-                vec3 reflectionDirection = reflect(-lightDirection, normal);
 
-                specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
-         }
-         float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
-         lightWeighting = uAmbientColor
+        vec3 eyeDirection = normalize(-vPosition.xyz);
+        vec3 reflectionDirection = reflect(-lightDirection, normal);
+
+        specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
+
+        float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
+        lightWeighting = uAmbientColor
                 + uPointLightingSpecularColor * specularLightWeighting
                 + uPointLightingDiffuseColor * diffuseLightWeighting;
-       	 fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
-       	 gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
+       	fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+       	gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
 
     }
 
@@ -82,21 +77,17 @@
         vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
         gl_Position = uPMatrix * vPosition;
         vTextureCoord = aTextureCoord;
-        if(uUseBumpMap)
-			{
-				vTransformedNormal = aVertexNormal;
-				//grabbing color for bump map
-				vec4 texColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
-				vec3 newColor = texColor.rgb;
 
-				float scalerRGB = sqrt((newColor[0]*newColor[0])+(newColor[1]*newColor[1])+(newColor[2]*newColor[2]));
-				scalerRGB = scalerRGB*4.0;
-				vTransformedNormal = scalerRGB*vTransformedNormal;
-				vTransformedNormal = uNMatrix * vTransformedNormal;
-			}
-			else{
-				vTransformedNormal = uNMatrix * aVertexNormal;
-			}
+		vTransformedNormal = aVertexNormal;
+		//grabbing color for bump map
+		vec4 texColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+		vec3 newColor = texColor.rgb;
+
+		float scalerRGB = sqrt((newColor[0]*newColor[0])+(newColor[1]*newColor[1])+(newColor[2]*newColor[2]));
+		scalerRGB = scalerRGB*4.0;
+		vTransformedNormal = scalerRGB*vTransformedNormal;
+		vTransformedNormal = uNMatrix * vTransformedNormal;
+
 
     }
 
@@ -139,8 +130,6 @@
     uniform vec3 uAmbientColor;
     uniform vec3 uLightingDirection;
     uniform vec3 uDirectionalColor;
-    uniform bool uUseLighting;
-    uniform bool uUseBumpMap;
 
     varying vec2 vTextureCoord;
     varying vec3 vLightWeighting;
@@ -148,35 +137,23 @@
 
 
     void main(void) {
+
         gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
         vTextureCoord = aTextureCoord;
-        if(!uUseLighting)
-        {
 
-        	vLightWeighting = vec3(1.0,1.0,1.0);
+		vNormalPosition = aVertexNormal;
+		//grabbing color for bump map
+		vec4 texColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+		vec3 newColor = texColor.rgb;
 
-		}
-		else
-		{
+		float scalerRGB = sqrt((newColor[0]*newColor[0])+(newColor[1]*newColor[1])+(newColor[2]*newColor[2]));
+		scalerRGB = scalerRGB*4.0;
+		vNormalPosition = scalerRGB*vNormalPosition;
 
-			vNormalPosition = aVertexNormal;
 
-			//bump map
-			if(uUseBumpMap)
-			{
-				//grabbing color for bump map
-				vec4 texColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
-				vec3 newColor = texColor.rgb;
-
-				float scalerRGB = sqrt((newColor[0]*newColor[0])+(newColor[1]*newColor[1])+(newColor[2]*newColor[2]));
-				scalerRGB = scalerRGB*4.0;
-				vNormalPosition = scalerRGB*vNormalPosition;
-
-			}
-			vec3 transformedNormal = uNMatrix * vNormalPosition;
-            float directionalLightWeighting = max(dot(transformedNormal, uLightingDirection), 0.0);
-            vLightWeighting = uAmbientColor + uDirectionalColor * directionalLightWeighting;
-        }
+		vec3 transformedNormal = uNMatrix * vNormalPosition;
+        float directionalLightWeighting = max(dot(transformedNormal, uLightingDirection), 0.0);
+        vLightWeighting = uAmbientColor + uDirectionalColor * directionalLightWeighting;
 
     }
 
@@ -282,15 +259,7 @@
         program.mvMatrixUniform = gl.getUniformLocation(program, "uMVMatrix");
         program.nMatrixUniform = gl.getUniformLocation(program, "uNMatrix");
         program.samplerUniform = gl.getUniformLocation(program, "uSampler");
-        program.useLightingUniform = gl.getUniformLocation(program, "uUseLighting");
         program.ambientColorUniform = gl.getUniformLocation(program, "uAmbientColor");
-        //bool handle for bump map
-        program.useBumpMapUniform = gl.getUniformLocation(program, "uUseBumpMap");
-        //handle for directional lighting
-        program.lightingDirectionUniform = gl.getUniformLocation(program, "uLightingDirection");
-        //handle to pass in the directional color values from user
-        program.directionalColorUniform = gl.getUniformLocation(program, "uDirectionalColor");
-        //needed for specular highlights
         program.materialShininessUniform = gl.getUniformLocation(program, "uMaterialShininess");
         program.showSpecularHighlightsUniform = gl.getUniformLocation(program, "uShowSpecularHighlights");
         program.pointLightingSpecularColorUniform = gl.getUniformLocation(program, "uPointLightingSpecularColor");
@@ -305,7 +274,7 @@
 
 
     function initShaders() {
-        currentProgram = createProgram("shader-fs", "shader-vs");
+        directionalProgram = createProgram("shader-fs", "shader-vs");
         perFragmentProgram = createProgram("per-fragment-lighting-fs", "per-fragment-lighting-vs");
     }
 
@@ -362,7 +331,7 @@
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        maze = maze(10,10);
+        maze = maze(15,15);
         console.log(display(maze));
         walls = buildMaze(maze);
 
@@ -395,7 +364,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Floor Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        var floorSize = 7.0;
+        var floorSize = 20.0;
         var floorPositions = [-floorSize, 0, -floorSize, -floorSize, 0, floorSize, floorSize, 0, floorSize, -floorSize, 0, -floorSize, floorSize, 0, -floorSize, floorSize, 0, floorSize];
         var floorTextureCoords = [0, floorSize, 0, 0, floorSize, 0, 0, floorSize, floorSize, floorSize, floorSize, 0];
         var floorNormals = [-floorSize, 1.0, -floorSize, -floorSize, 1.0, floorSize, floorSize, 1.0, floorSize, -floorSize, 1.0, -floorSize, floorSize, 1.0, -floorSize, floorSize, 1.0, floorSize];
@@ -425,7 +394,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         var latitudeBands = 20;
         var longitudeBands = 20;
-        var radius = 50.0;
+        var radius = 40.0;
 
         var vertexPositionData = [];
         var normalData = [];
@@ -569,12 +538,9 @@
 
 
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
-        //gl.clearColor(0.4,0.4,0.4,1.0);
         gl.enable(gl.DEPTH_TEST);
         // Draw the Scene
         Frames();
-        // If doing an animation need to add code to rotate our geometry
-
     }
 
 
@@ -625,6 +591,7 @@
         mat4.perspective(100, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
         //Select Shader Program
 
+        //currentProgram = directionalProgram;
         currentProgram = perFragmentProgram;
 
         gl.useProgram(currentProgram);
@@ -786,6 +753,8 @@
 
 Author: Garett Skaar & Jordin Rausch
 <br/>
-Sources used: http://learningwebgl.com/blog/
+Sources used:<br>
+http://learningwebgl.com/blog/<br>
+http://rosettacode.org/wiki/Maze_generation#JavaScript
 <br/>
 
