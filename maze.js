@@ -86,7 +86,7 @@ var width = 1;
 var height = 1;
 
 function pushHorizontalVerticies(vertexPositions, x, y, z) {
-    console.log(x+" "+y+" "+z);
+    //console.log(x+" "+y+" "+z);
     vertexPositions.push(
         x, y + height, z,
         x, y, z,
@@ -107,7 +107,7 @@ function pushHorizontalTexCoords(vertexTextureCoords){
         );
 }
 function pushVerticalVerticies(vertexPositions, x, y, z) {
-    console.log(x+" "+y+" "+z);
+    //console.log(x+" "+y+" "+z);
     vertexPositions.push(
         x, y + height, z,
         x, y, z,

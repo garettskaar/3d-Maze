@@ -624,33 +624,23 @@
         }
         mat4.perspective(100, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
         //Select Shader Program
-        var specularHighlights = document.getElementById("specular").checked;
-        if (specularHighlights) {
-            currentProgram = perFragmentProgram;
-        } else {
-            currentProgram = currentProgram;
-        }
+
+        currentProgram = perFragmentProgram;
+
         gl.useProgram(currentProgram);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Se up Lighting
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        var lighting = document.getElementById("lighting").checked;
-        var bumpMap = document.getElementById("bumpMap").checked;
 
-        gl.uniform1i(currentProgram.showSpecularHighlightsUniform, specularHighlights);
-        gl.uniform1i(currentProgram.useBumpMapUniform, bumpMap);
-        gl.uniform1i(currentProgram.useLightingUniform, lighting);
-
-        if (lighting || specularHighlights) {
             gl.uniform3f(
                 currentProgram.ambientColorUniform,0.5,0.5,0.5
             );
 
             var lightingDirection = [
-                -0.25,
-                -0.25,
-                -1.0
+                 0.0,
+                -1.0,
+                 0.0
             ];
             var adjustedLD = vec3.create();
             vec3.normalize(lightingDirection, adjustedLD);
@@ -663,12 +653,13 @@
             );
 
             //light location
-            gl.uniform3f(currentProgram.pointLightingLocationUniform, -10.0, 4.0, -20.0);
+            gl.uniform3f(currentProgram.pointLightingLocationUniform, 2.0, 8.0, 1.0);
+            //gl.uniform3f(currentProgram.pointLightingLocationUniform, xPos, yPos+10.0, zPos);
             //specular light value
             gl.uniform3f(currentProgram.pointLightingSpecularColorUniform, 0.8, 0.8, 0.8);
             //diffues light color
             gl.uniform3f(currentProgram.pointLightingDiffuseColorUniform, 0.8, 0.8, 0.8);
-        }
+
 
         //shininess of specular light reflection
         gl.uniform1f(currentProgram.materialShininessUniform, 16.0);
@@ -680,10 +671,9 @@
 
         mat4.identity(mvMatrix);
 
-
-        //////////////////////////////////////////////
+        ///////////////////////
         //// Look At Matrix
-        //////////////////////////////////////////////
+        ///////////////////////
 
         mat4.rotate(mvMatrix, -horizontal, [0, 1, 0]);
         avm = getViewMatrix();
@@ -793,11 +783,6 @@
     If you're seeing this your web browser doesn't support the &lt;canvas>&gt; element. Ouch!
 </canvas>
 <br/>
-
-<input type="checkbox" id="lighting" unchecked/> Use Directional lighting<br/>
-<input type="checkbox" id="specular" unchecked/> Show Specular Highlights (Phong Shading)<br/>
-<input type="checkbox" id="bumpMap" unchecked/> Bump Map<br/>
-
 
 Author: Garett Skaar & Jordin Rausch
 <br/>
