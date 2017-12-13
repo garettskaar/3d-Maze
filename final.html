@@ -24,7 +24,6 @@
 
     uniform bool uShowSpecularHighlights;
     uniform bool uUseLighting;
-    uniform bool uUseFlat;
     uniform bool uUseBumpMap;
 
 
@@ -41,31 +40,24 @@
         vec3 lightWeighting;
         vec4 fragmentColor;
 
-        if(uUseFlat)
-        {
-        	lightWeighting = vec3(1.0, 1.0, 1.0);
-        	fragmentColor = texture2D(uSampler, vec2(floor(vTextureCoord.s*64.0)/64.0, floor(vTextureCoord.t*64.0)/64.0));
-        	gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
-        }
-        else {
-            vec3 lightDirection = normalize(uPointLightingLocation - vPosition.xyz);
-            vec3 normal = normalize(vTransformedNormal);
 
-            float specularLightWeighting = 0.0;
-            if (uShowSpecularHighlights) {
+        vec3 lightDirection = normalize(uPointLightingLocation - vPosition.xyz);
+        vec3 normal = normalize(vTransformedNormal);
+
+        float specularLightWeighting = 0.0;
+        if (uShowSpecularHighlights){
                 vec3 eyeDirection = normalize(-vPosition.xyz);
                 vec3 reflectionDirection = reflect(-lightDirection, normal);
 
                 specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
-            }
-
-            float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
-            lightWeighting = uAmbientColor
+         }
+         float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
+         lightWeighting = uAmbientColor
                 + uPointLightingSpecularColor * specularLightWeighting
                 + uPointLightingDiffuseColor * diffuseLightWeighting;
        	 fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
        	 gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
-        }
+
     }
 
     </script>
@@ -121,19 +113,13 @@
     varying vec4 vPosition;
 
 	uniform sampler2D uSampler;
-    uniform bool uUseFlat;
+
 
 
 
     void main(void) {
 
 			vec4 textureColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
-
-			if(uUseFlat)
-			{
-				 textureColor = texture2D(uSampler, vec2(floor(vTextureCoord.s*64.0)/64.0, floor(vTextureCoord.t*64.0)/64.0));
-			}
-
         	gl_FragColor = vec4(textureColor.rgb * vLightWeighting, textureColor.a);
     }
 
@@ -300,7 +286,6 @@
         program.ambientColorUniform = gl.getUniformLocation(program, "uAmbientColor");
         //bool handle for bump map
         program.useBumpMapUniform = gl.getUniformLocation(program, "uUseBumpMap");
-        program.useFlatUniform = gl.getUniformLocation(program, "uUseFlat");
         //handle for directional lighting
         program.lightingDirectionUniform = gl.getUniformLocation(program, "uLightingDirection");
         //handle to pass in the directional color values from user
@@ -314,7 +299,7 @@
         return program;
     }
 
-    var currentProgram;
+
     var currentProgram;
     var perFragmentProgram;
 
@@ -357,6 +342,10 @@
 
     // create and initialize our geometry objects
 
+    var wallVertexPositionBuffer = null;
+    var wallVertexTextureCoordBuffer = null;
+    var floorVertexPositionBuffer = null;
+    var floorVertexTextureCoordBuffer = null;
 
     var sphereVertexPositionBuffer;
     var sphereVertexNormalBuffer;
@@ -365,19 +354,21 @@
 
     function initGeometry() {
 
+        var vertexPositions = [];
+        var textureCoords = [];
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        maze = maze(7,7);
+        maze = maze(7,8);
         console.log(display(maze));
         walls = buildMaze(maze);
 
         vertexPositions = walls.p;
         textureCoords = walls.t;
-        console.log(vertexPositions.length);
-        console.log(textureCoords.length);
+        console.log(vertexPositions.length/3);
+        console.log(textureCoords.length/2);
 
 
         wallVertexPositionBuffer = gl.createBuffer();
@@ -416,7 +407,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         var latitudeBands = 20;
         var longitudeBands = 20;
-        var radius = 1.0;
+        var radius = 50.0;
 
         var vertexPositionData = [];
         var normalData = [];
@@ -437,9 +428,9 @@
                 var u = 1 - (longNumber / longitudeBands);
                 var v = 1 - (latNumber / latitudeBands);
 
-                normalData.push(x);
-                normalData.push(y);
-                normalData.push(z);
+                normalData.push(-x);
+                normalData.push(-y);
+                normalData.push(-z);
                 textureCoordData.push(u);
                 textureCoordData.push(v);
                 vertexPositionData.push(radius * x);
@@ -499,7 +490,7 @@
         exTexture.image.onload = function () {
             handleLoadedTexture(exTexture)
         };
-        exTexture.image.src = "steel.png";
+        exTexture.image.src = "redsky.png";
 
         // Floor Texture
         floorTexture = gl.createTexture();
@@ -507,7 +498,7 @@
         floorTexture.image.onload = function () {
             handleLoadedTextureNoMips(floorTexture)
         };
-        floorTexture.image.src = "ground.png";
+        floorTexture.image.src = "floortile.png";
 
         // Floor Texture
         boxTexture = gl.createTexture();
@@ -590,8 +581,8 @@
     // then we define our View positions for our camera using WebGL matrices.
     // OpenGL has convenience methods for this such as glPerspective().
     // finally we call the gl draw methods to draw our defined geometry objects.
+
     var xRot = 0;
-    var zRot = 0;
     //camera variables (initial)
     var xPos = 0.0;
     var yPos = 0.11;
@@ -600,10 +591,7 @@
     var horizontal = 0;
     var vertical = 0;
 
-
     var speed = 0;
-
-
 
     function drawScene() {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -674,15 +662,14 @@
 
         mat4.identity(mvMatrix);
 
-        //mat4.rotate(mvMatrix, degToRad(-xPos), [1, 0, 0]);
-        //mat4.rotate(mvMatrix, degToRad(-zPos), [0, 1, 0]);
 
-        //mat4.translate(mvMatrix, [-xPos, -2.5-yPos, -zPos]);
+        //////////////////////////////////////////////
+        //// Look At Matrix
+        //////////////////////////////////////////////
 
         mat4.rotate(mvMatrix, -horizontal, [0, 1, 0]);
         avm = getViewMatrix();
         mat4.multiply(mvMatrix,avm);
-
 
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, boxTexture);
@@ -690,9 +677,12 @@
 
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexPositionBuffer);
         gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, wallVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        console.log("buffer size = "+wallVertexPositionBuffer.numItems);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexTextureCoordBuffer);
         gl.vertexAttribPointer(currentProgram.textureCoordAttribute, wallVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        console.log("buffer tex size = "+wallVertexTextureCoordBuffer.numItems);
+
 
         setMatrixUniforms();
         gl.drawArrays(gl.TRIANGLES, 0, wallVertexPositionBuffer.numItems);
@@ -700,11 +690,6 @@
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, floorTexture);
         gl.uniform1i(currentProgram.samplerUniform, 0);
-
-
-       //////////////////////////////////////////////
-       //// Look At Matrix, needs work.......
-       //////////////////////////////////////////////
 
 
         gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexPositionBuffer);
@@ -718,15 +703,12 @@
         gl.drawArrays(gl.TRIANGLES, 0, floorVertexPositionBuffer.numItems);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //  Render Ball
+        //  Render Sky
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        mat4.identity(mvMatrix);
+        mat4.rotateY(mvMatrix, xRot / 180.0 * 3.1415);
+        mat4.rotateZ(mvMatrix, xRot / 180.0 * 3.1415);
 
-
-
-        mat4.translate(mvMatrix, [-xPos, yPos, -5.0 - zPos]);
-       // mat4.rotateX(mvMatrix, xRot / 180.0 * 3.1415);
 
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, exTexture);
@@ -754,6 +736,7 @@
         if (lastTime != 0) {
             var elapsed = timeNow - lastTime;
             //handles movement and direction change
+            xRot += (elapsed/1000);
             if (speed != 0) {
                 xPos -= Math.sin(horizontal) * speed * elapsed;
                 zPos -= Math.cos(horizontal) * speed * elapsed;
@@ -780,7 +763,7 @@
 <!-- the onload attribute specifies a javascript function to execute when the body tag is loaded into the browser -->
 
 <body onload="startHelloWebGL()">
-<h1>Final Project: Balls!</h1>
+<h1>Final Project: Maze</h1>
 
 <!-- embed the HTML5 Canvas Drawing object on the page.-->
 <!-- Name the canvas 'hellowebgl' for the javascript code. -->
