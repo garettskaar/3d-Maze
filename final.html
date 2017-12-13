@@ -307,8 +307,53 @@
         mat3.transpose(normalMatrix);
         gl.uniformMatrix3fv(currentProgram.nMatrixUniform, false, normalMatrix);
     }
+    //needs work yo
+    function collisionCheck(cX, cZ, xCollision, zCollision)
+    {
+        var epsilon = 0.1;
+        var pointC = [cX, cZ];
+        var crossProduct = 0;
+        var dotProduct = 0;
+        var squareOfDistance = 0;
+        var i = 0;
+        var collision = true;
+        while (i < xCollision.length) {
 
 
+            var pointA = [xCollision[i], zCollision[i]];
+            var pointB = [xCollision[i + 1], zCollision[i + 1]];
+            console.log("C = ("+pointC[0]+","+pointC[1]+")");
+
+            crossProduct = (pointC[1] - pointA[1])*(pointB[0] - pointA[0])-(pointC[0] - pointA[0])*(pointB[1] - pointA[1]);
+            console.log("CP = "+crossProduct);
+            if( Math.abs(crossProduct) > epsilon)
+            {
+                collision = false;
+            }
+            dotProduct = (pointC[0] - pointA[0]) * (pointB[0] - pointA[0]) + (pointC[1] - pointA[1])*(pointB[1] - pointA[1]);
+            console.log("DP = "+dotProduct);
+            if(dotProduct < 0)
+            {
+                collision = false;
+            }
+            squareOfDistance = (pointB[0] - pointA[0])*(pointB[0] - pointA[0])+(pointB[1] - pointA[1])*(pointB[1] - pointA[1]);
+            console.log("SQU = "+squareOfDistance);
+            if(dotProduct > squareOfDistance)
+            {
+                collision = false;
+            }
+            if(collision == true)
+            {
+                return collision
+            }
+            else
+            {
+                i++
+            }
+
+        }
+        return collision;
+    }
     // create and initialize our geometry objects
 
     var wallVertexPositionBuffer = null;
@@ -320,6 +365,8 @@
     var sphereVertexNormalBuffer;
     var sphereVertexTextureCoordBuffer;
     var sphereVertexIndexBuffer;
+    var xCollision = [];
+    var zCollision = [];
 
     function initGeometry() {
 
@@ -327,19 +374,23 @@
         var textureCoords = [];
         var normalPos = [];
 
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        maze = maze(15,15);
+        maze = maze(2,2);
         console.log(display(maze));
         walls = buildMaze(maze);
 
         vertexPositions = walls.p;
         textureCoords = walls.t;
         normalPos = walls.p;
-        console.log(vertexPositions.length/3);
-        console.log(textureCoords.length/2);
+        xCollision = walls.x;
+        zCollision = walls.z;
+
+        //console.log(xCollision.length);
+        //console.log(zCollision.length);
 
 
         wallVertexPositionBuffer = gl.createBuffer();
@@ -355,6 +406,7 @@
         wallVertexTextureCoordBuffer.itemSize = 2;
         wallVertexTextureCoordBuffer.numItems = textureCoords.length / 2;
 
+        //This is needed, lighting or not....
         wallVertexNormalBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexNormalBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normalPos), gl.STATIC_DRAW);
@@ -547,7 +599,7 @@
     function getViewMatrix()
     {
         //sphere position
-        eye = [xPos,yPos+0.4,zPos];
+        eye = [xPos,yPos+0.52,zPos];
         //initial location you look at
         initialD = [0.0,0.0,-10];
         //calculate adjusted target
@@ -569,7 +621,7 @@
     var xRot = 0;
     //camera variables (initial)
     var xPos = 0.0;
-    var yPos = 0.11;
+    var yPos = 0.0;
     var zPos = 0.0;
 
     var horizontal = 0;
@@ -578,6 +630,10 @@
     var speed = 0;
 
     function drawScene() {
+
+        //console.log("x pos: "+xPos+"\n");
+        //console.log("z pos: "+zPos+"\n");
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Scene
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -643,6 +699,8 @@
         ///////////////////////
 
         mat4.rotate(mvMatrix, -horizontal, [0, 1, 0]);
+        //mat4.rotate(mvMatrix, -vertical, [1, 0, 0]);
+
         avm = getViewMatrix();
         mat4.multiply(mvMatrix,avm);
 
@@ -714,11 +772,27 @@
         var timeNow = new Date().getTime();
         if (lastTime != 0) {
             var elapsed = timeNow - lastTime;
-            //handles movement and direction change
+            //handles movement and direction changeww
             xRot += (elapsed/1000);
+            tempX = xPos;
+            tempZ = zPos;
             if (speed != 0) {
-                xPos -= Math.sin(horizontal) * speed * elapsed;
-                zPos -= Math.cos(horizontal) * speed * elapsed;
+                var xStep = Math.sin(horizontal) * speed * elapsed;
+                var zStep = Math.cos(horizontal) * speed * elapsed;
+                tempX -= xStep;
+                tempZ -= zStep;
+                // if(collisionCheck(tempX,tempZ, xCollision, zCollision) == true)
+                // {
+                //     console.log("TRUE!!!");
+                //     tempX = xPos;
+                //     tempZ = zPos;
+                // }
+                // else
+                // {
+                    xPos -= xStep;
+                    zPos -= zStep;
+                    console.log("x: "+xPos+"\nz: "+zPos);
+                // }
             }
 
         }

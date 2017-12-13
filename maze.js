@@ -86,7 +86,7 @@ var width = 1;
 var height = 1;
 
 function pushHorizontalVerticies(vertexPositions, x, y, z) {
-    //console.log(x+" "+y+" "+z);
+    //console.log("coordHoriz: ("+x+", "+z+")\t("+(x+width)+", "+z+")\n");
     vertexPositions.push(
         x, y + height, z,
         x, y, z,
@@ -107,7 +107,7 @@ function pushHorizontalTexCoords(vertexTextureCoords){
         );
 }
 function pushVerticalVerticies(vertexPositions, x, y, z) {
-    //console.log(x+" "+y+" "+z);
+    //console.log("coordVerti: ("+x+", "+z+")\t("+x+", "+(z+width)+")\n");
     vertexPositions.push(
         x, y + height, z,
         x, y, z,
@@ -127,11 +127,27 @@ function pushVerticalTexCoords(vertexTextureCoords){
         width, 0.0
     );
 }
-//Builds maze geometery.
 
+function pushCollisionH(xCollision, zCollision, x, z)
+{
+    xCollision.push(x);
+    zCollision.push(z);
+    xCollision.push(x+width);
+    zCollision.push(z);
+}
+function pushCollisionV(xCollision, zCollision, x, z)
+{
+    xCollision.push(x);
+    zCollision.push(z);
+    xCollision.push(x);
+    zCollision.push(z+width);
+}
+//Builds maze geometery.
 function buildMaze(m) {
     var vertexPositions = [];
     var vertexTextureCoords = [];
+    var xCollision = [];
+    var zCollision = [];
     var h = m.x / 2;
     for (var j = 0; j < m.x * 2 + 1; j++) {
         var line = [];
@@ -142,6 +158,7 @@ function buildMaze(m) {
                 } else if (k > 0 || j > 0) { // "-"
                     pushHorizontalVerticies(vertexPositions, k - h, 0.0, (j - 1.0) / 2.0 - h);
                     pushHorizontalTexCoords(vertexTextureCoords);
+                    pushCollisionH(xCollision, zCollision,k - h, (j - 1.0) / 2.0 - h);
                 }
             }
         } else {
@@ -151,12 +168,15 @@ function buildMaze(m) {
                 } else if (j != m.x * 2 - 1 || k != m.y) { // |
                     pushVerticalVerticies(vertexPositions, k - h, 0.0, (j - 2.0) / 2.0 - h);
                     pushVerticalTexCoords(vertexTextureCoords);
+                    pushCollisionV(xCollision, zCollision, k - h, (j - 2.0) / 2.0 - h);
                 }
             }
         }
     }
     return {
         p: vertexPositions,
-        t: vertexTextureCoords
+        t: vertexTextureCoords,
+        x: xCollision,
+        z: zCollision
     };
 }
