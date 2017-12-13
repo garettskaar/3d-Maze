@@ -17,8 +17,8 @@
       <file leaf-file-name="final.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/final.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3676">
-              <caret line="764" column="33" lean-forward="true" selection-start-line="764" selection-start-column="33" selection-end-line="764" selection-end-column="33" />
+            <state relative-caret-position="238">
+              <caret line="364" column="25" lean-forward="false" selection-start-line="364" selection-start-column="25" selection-end-line="364" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -27,8 +27,8 @@
       <file leaf-file-name="maze.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/maze.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-883">
-              <caret line="31" column="34" lean-forward="true" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+            <state relative-caret-position="-475">
+              <caret line="85" column="14" lean-forward="false" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -37,8 +37,8 @@
       <file leaf-file-name="handlers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/handlers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2516">
-              <caret line="148" column="4" lean-forward="false" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
+            <state relative-caret-position="663">
+              <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -76,9 +76,9 @@
         <option value="$PROJECT_DIR$/Shaders_A4_addingspec.html" />
         <option value="$PROJECT_DIR$/glMatrix_util.js" />
         <option value="$PROJECT_DIR$/Assignment4_Shaders.html" />
+        <option value="$PROJECT_DIR$/mazeTest.js" />
         <option value="$PROJECT_DIR$/handlers.js" />
         <option value="$PROJECT_DIR$/maze.js" />
-        <option value="$PROJECT_DIR$/mazeTest.js" />
         <option value="$PROJECT_DIR$/final.html" />
       </list>
     </option>
@@ -174,12 +174,12 @@
       <workItem from="1510886520053" duration="6994000" />
       <workItem from="1510934857583" duration="1416000" />
       <workItem from="1512661076345" duration="10983000" />
-      <workItem from="1513183229439" duration="3694000" />
+      <workItem from="1513183229439" duration="6978000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58234000" />
+    <option name="totallyTimeSpent" value="61518000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="54" y="22" width="1637" height="1028" extended-state="0" />
@@ -354,24 +354,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/maze.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-883">
-          <caret line="31" column="34" lean-forward="true" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+        <state relative-caret-position="-475">
+          <caret line="85" column="14" lean-forward="false" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/handlers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2516">
-          <caret line="148" column="4" lean-forward="false" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
+        <state relative-caret-position="663">
+          <caret line="39" column="22" lean-forward="true" selection-start-line="39" selection-start-column="22" selection-end-line="39" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/final.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3676">
-          <caret line="764" column="33" lean-forward="true" selection-start-line="764" selection-start-column="33" selection-end-line="764" selection-end-column="33" />
+        <state relative-caret-position="238">
+          <caret line="364" column="25" lean-forward="false" selection-start-line="364" selection-start-column="25" selection-end-line="364" selection-end-column="25" />
           <folding />
         </state>
       </provider>

@@ -272,11 +272,11 @@
         program.vertexPositionAttribute = gl.getAttribLocation(program, "aVertexPosition");
         gl.enableVertexAttribArray(program.vertexPositionAttribute);
 
-        program.vertexNormalAttribute = gl.getAttribLocation(program, "aVertexNormal");
-        gl.enableVertexAttribArray(program.vertexNormalAttribute);
-
         program.textureCoordAttribute = gl.getAttribLocation(program, "aTextureCoord");
         gl.enableVertexAttribArray(program.textureCoordAttribute);
+
+        program.vertexNormalAttribute = gl.getAttribLocation(program, "aVertexNormal");
+        gl.enableVertexAttribArray(program.vertexNormalAttribute);
 
         program.pMatrixUniform = gl.getUniformLocation(program, "uPMatrix");
         program.mvMatrixUniform = gl.getUniformLocation(program, "uMVMatrix");
@@ -356,17 +356,19 @@
 
         var vertexPositions = [];
         var textureCoords = [];
+        var normalPos = [];
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        maze = maze(7,8);
+        maze = maze(10,10);
         console.log(display(maze));
         walls = buildMaze(maze);
 
         vertexPositions = walls.p;
         textureCoords = walls.t;
+        normalPos = walls.p;
         console.log(vertexPositions.length/3);
         console.log(textureCoords.length/2);
 
@@ -377,11 +379,18 @@
         wallVertexPositionBuffer.itemSize = 3;
         wallVertexPositionBuffer.numItems = vertexPositions.length / 3;
 
+
         wallVertexTextureCoordBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexTextureCoordBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
         wallVertexTextureCoordBuffer.itemSize = 2;
         wallVertexTextureCoordBuffer.numItems = textureCoords.length / 2;
+
+        wallVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normalPos), gl.STATIC_DRAW);
+        wallVertexNormalBuffer.itemSize = 3;
+        wallVertexNormalBuffer.numItems = normalPos.length / 3;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Floor Geometry
@@ -389,6 +398,7 @@
         var floorSize = 7.0;
         var floorPositions = [-floorSize, 0, -floorSize, -floorSize, 0, floorSize, floorSize, 0, floorSize, -floorSize, 0, -floorSize, floorSize, 0, -floorSize, floorSize, 0, floorSize];
         var floorTextureCoords = [0, floorSize, 0, 0, floorSize, 0, 0, floorSize, floorSize, floorSize, floorSize, 0];
+        var floorNormals = [-floorSize, 1.0, -floorSize, -floorSize, 1.0, floorSize, floorSize, 1.0, floorSize, -floorSize, 1.0, -floorSize, floorSize, 1.0, -floorSize, floorSize, 1.0, floorSize];
 
         floorVertexPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexPositionBuffer);
@@ -401,6 +411,14 @@
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(floorTextureCoords), gl.STATIC_DRAW);
         floorVertexTextureCoordBuffer.itemSize = 2;
         floorVertexTextureCoordBuffer.numItems = floorTextureCoords.length / 2;
+
+        floorVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexNormalBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(floorNormals), gl.STATIC_DRAW);
+        floorVertexNormalBuffer.itemSize = 3;
+        floorVertexNormalBuffer.numItems = floorNormals.length / 3;
+
+
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Sphere Geometry
@@ -563,7 +581,7 @@
     function getViewMatrix()
     {
         //sphere position
-        eye = [xPos,yPos+0.5,zPos];
+        eye = [xPos,yPos+0.4,zPos];
         //initial location you look at
         initialD = [0.0,0.0,-10];
         //calculate adjusted target
@@ -675,14 +693,16 @@
         gl.bindTexture(gl.TEXTURE_2D, boxTexture);
         gl.uniform1i(currentProgram.samplerUniform, 0);
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexPositionBuffer);
-        gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, wallVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-        console.log("buffer size = "+wallVertexPositionBuffer.numItems);
-
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexTextureCoordBuffer);
         gl.vertexAttribPointer(currentProgram.textureCoordAttribute, wallVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
-        console.log("buffer tex size = "+wallVertexTextureCoordBuffer.numItems);
+        //console.log("buffer tex size = "+wallVertexTextureCoordBuffer.numItems);
 
+        gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexNormalBuffer);
+        gl.vertexAttribPointer(currentProgram.vertexNormalAttribute, wallVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexPositionBuffer);
+        gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, wallVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        //console.log("buffer size = "+wallVertexPositionBuffer.numItems);
 
         setMatrixUniforms();
         gl.drawArrays(gl.TRIANGLES, 0, wallVertexPositionBuffer.numItems);
@@ -695,6 +715,8 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexPositionBuffer);
         gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, floorVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
+        gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexNormalBuffer);
+        gl.vertexAttribPointer(currentProgram.vertexNormalAttribute, floorVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, floorVertexTextureCoordBuffer);
         gl.vertexAttribPointer(currentProgram.textureCoordAttribute, floorVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);

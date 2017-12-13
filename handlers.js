@@ -54,10 +54,10 @@ var handleKeyUp = function (event)
 
 function handleKeys() {
     if (currentlyPressedKeys[87]) {
-        speed = 0.003;
+        speed = 0.001;
     }
     else if (currentlyPressedKeys[83]) {
-        speed = -0.003;
+        speed = -0.001;
     }
     else{
         speed = 0;
