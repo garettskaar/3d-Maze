@@ -82,6 +82,30 @@ function display(m) {
     return text.join('');
 }
 
+function getWalls(maze, s) {
+    maze.trim();
+    var sizeH = s*4 + 3;
+    var sizeV = s*2 + 1;
+    var x = new Array(sizeV);
+    for (var i = 0; i < sizeV; i++) {
+        x[i] = new Array(sizeH);
+    }
+
+    for(var k=0; k<sizeV; k++){
+        for(var j=0; j<sizeH; j++) {
+            if(maze[k*sizeH + j] == '-' || maze[k*sizeH + j] == '|' || maze[k*sizeH + j] == '+'){
+                x[k][j] = 1;
+            }
+            if(maze[k*sizeH + j] == ' '){
+                x[k][j] = 0;
+            }
+        }
+    }
+
+    return x;
+
+}
+
 var width = 1;
 var height = 1;
 

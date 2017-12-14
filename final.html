@@ -380,7 +380,20 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         maze = maze(15,15);
-        console.log(display(maze));
+        var map = display(maze);
+        console.log(map);
+        var wallMap = getWalls(map, 15);
+
+        var map = '';
+        for(i=0; i<31; i++) {
+            for(j=0; j<61; j++) {
+                map += wallMap[i][j] + ' ';
+            }
+            console.log(map);
+            map = '';
+        }
+
+
         walls = buildMaze(maze);
 
         vertexPositions = walls.p;
