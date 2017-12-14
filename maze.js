@@ -152,26 +152,20 @@ function pushVerticalTexCoords(vertexTextureCoords){
     );
 }
 
-function pushCollisionH(xCollision, zCollision, x, z)
+function pushCollisionH(hCollision, x, z)
 {
-    xCollision.push(x);
-    zCollision.push(z);
-    xCollision.push(x+width);
-    zCollision.push(z);
+    hCollision.push({x: x, z: z});
 }
-function pushCollisionV(xCollision, zCollision, x, z)
+function pushCollisionV(vCollision, x, z)
 {
-    xCollision.push(x);
-    zCollision.push(z);
-    xCollision.push(x);
-    zCollision.push(z+width);
+    vCollision.push({x: x, z: z});
 }
 //Builds maze geometery.
 function buildMaze(m) {
     var vertexPositions = [];
     var vertexTextureCoords = [];
-    var xCollision = [];
-    var zCollision = [];
+    var hCollision = [];
+    var vCollision = [];
     var h = m.x / 2;
     for (var j = 0; j < m.x * 2 + 1; j++) {
         var line = [];
@@ -182,7 +176,7 @@ function buildMaze(m) {
                 } else if (k > 0 || j > 0) { // "-"
                     pushHorizontalVerticies(vertexPositions, k - h, 0.0, (j - 1.0) / 2.0 - h);
                     pushHorizontalTexCoords(vertexTextureCoords);
-                    pushCollisionH(xCollision, zCollision,k - h, (j - 1.0) / 2.0 - h);
+                    pushCollisionH(hCollision, k - h, (j - 1.0) / 2.0 - h);
                 }
             }
         } else {
@@ -192,7 +186,7 @@ function buildMaze(m) {
                 } else if (j != m.x * 2 - 1 || k != m.y) { // |
                     pushVerticalVerticies(vertexPositions, k - h, 0.0, (j - 2.0) / 2.0 - h);
                     pushVerticalTexCoords(vertexTextureCoords);
-                    pushCollisionV(xCollision, zCollision, k - h, (j - 2.0) / 2.0 - h);
+                    pushCollisionV(vCollision, k - h, (j - 2.0) / 2.0 - h);
                 }
             }
         }
@@ -200,7 +194,51 @@ function buildMaze(m) {
     return {
         p: vertexPositions,
         t: vertexTextureCoords,
-        x: xCollision,
-        z: zCollision
+        h: hCollision,
+        v: vCollision
     };
 }
+//holding this collision method, might need it back
+// var epsilon = 0.1;
+// var pointC = [cX, cZ];
+// var crossProduct = 0;
+// var dotProduct = 0;
+// var squareOfDistance = 0;
+// var i = 0;
+// var collision = true;
+// while (i < xCollision.length) {
+//
+//
+//     var pointA = [xCollision[i], zCollision[i]];
+//     var pointB = [xCollision[i + 1], zCollision[i + 1]];
+//     console.log("C = ("+pointC[0]+","+pointC[1]+")");
+//
+//     crossProduct = (pointC[1] - pointA[1])*(pointB[0] - pointA[0])-(pointC[0] - pointA[0])*(pointB[1] - pointA[1]);
+//     console.log("CP = "+crossProduct);
+//     if( Math.abs(crossProduct) > epsilon)
+//     {
+//         collision = false;
+//     }
+//     dotProduct = (pointC[0] - pointA[0]) * (pointB[0] - pointA[0]) + (pointC[1] - pointA[1])*(pointB[1] - pointA[1]);
+//     console.log("DP = "+dotProduct);
+//     if(dotProduct < 0)
+//     {
+//         collision = false;
+//     }
+//     squareOfDistance = (pointB[0] - pointA[0])*(pointB[0] - pointA[0])+(pointB[1] - pointA[1])*(pointB[1] - pointA[1]);
+//     console.log("SQU = "+squareOfDistance);
+//     if(dotProduct > squareOfDistance)
+//     {
+//         collision = false;
+//     }
+//     if(collision == true)
+//     {
+//         return collision
+//     }
+//     else
+//     {
+//         i++
+//     }
+//
+// }
+// return collision;
