@@ -82,58 +82,58 @@ function display(m) {
     return text.join('');
 }
 
-function getWalls(maze, s) {
-    maze.trim();
-    var height = 61;
-    var width = 63; // add 2 for '\n'
-
-    var x = new Array(height);
-    for (var k = 0; k < height; k++) {
-        x[k] = new Array(width-2);
-    }
-
-    var i = 0 //index of array
-    var c = 0 //index of strinified maze
-    while(i < height) {
-        if (i%4 === 0) {
-            for (var j = 0; j < width - 2; j++) {
-                if (maze[c * width + j] === '+' || maze[c * width + j] === '-') {
-                    x[i][j] = 1;
-                } else if(maze[c * width + j] == ' '){
-                    x[i][j] = 0;
-                }
-            }
-        } else {
-            for (var j = 0; j < width - 2; j++) {
-                if (maze[c * width + j] === '|') {
-                    x[i][j] = 1;
-                } else if(maze[c * width + j] === ' '){
-                    x[i][j] = 0;
-                }
-            }
-            i++
-            for (var j = 0; j < width - 2; j++) {
-                if (maze[c * width + j] === '|') {
-                    x[i][j] = 1;
-                } else if(maze[c * width + j] === ' '){
-                    x[i][j] = 0;
-                }
-            }
-            i++
-            for (var j = 0; j < width - 2; j++) {
-                if (maze[c * width + j] == '|') {
-                    x[i][j] = 1;
-                } else if(maze[c * width + j] === ' '){
-                    x[i][j] = 0;
-                }
-            }
-        }
-        i++;
-        c++;
-    }
-
-    return x;
-}
+// function getWalls(maze, s) {
+//     maze.trim();
+//     var height = 61;
+//     var width = 63; // add 2 for '\n'
+//
+//     var x = new Array(height);
+//     for (var k = 0; k < height; k++) {
+//         x[k] = new Array(width-2);
+//     }
+//
+//     var i = 0 //index of array
+//     var c = 0 //index of strinified maze
+//     while(i < height) {
+//         if (i%4 === 0) {
+//             for (var j = 0; j < width - 2; j++) {
+//                 if (maze[c * width + j] === '+' || maze[c * width + j] === '-') {
+//                     x[i][j] = 1;
+//                 } else if(maze[c * width + j] == ' '){
+//                     x[i][j] = 0;
+//                 }
+//             }
+//         } else {
+//             for (var j = 0; j < width - 2; j++) {
+//                 if (maze[c * width + j] === '|') {
+//                     x[i][j] = 1;
+//                 } else if(maze[c * width + j] === ' '){
+//                     x[i][j] = 0;
+//                 }
+//             }
+//             i++
+//             for (var j = 0; j < width - 2; j++) {
+//                 if (maze[c * width + j] === '|') {
+//                     x[i][j] = 1;
+//                 } else if(maze[c * width + j] === ' '){
+//                     x[i][j] = 0;
+//                 }
+//             }
+//             i++
+//             for (var j = 0; j < width - 2; j++) {
+//                 if (maze[c * width + j] == '|') {
+//                     x[i][j] = 1;
+//                 } else if(maze[c * width + j] === ' '){
+//                     x[i][j] = 0;
+//                 }
+//             }
+//         }
+//         i++;
+//         c++;
+//     }
+//
+//     return x;
+// }
 
 var width = 1;
 var height = 1;
@@ -271,3 +271,30 @@ function buildMaze(m) {
 //
 // }
 // return collision;
+
+// function collisionIndex(cX, cZ)
+// {
+//     if(cX < -8.0 || cX > 7.0 || cZ < -8.0 || cZ > 7.0) {
+//         return 0;
+//     }
+//     xIndex = Math.floor(((cX + 8.0)*61.0)/15.0);
+//     zIndex = Math.floor(((cZ + 8.0)*61.0)/15.0);
+//     //console.log('xIndex: ' + xIndex);
+//     //console.log('zIndex: ' + zIndex);
+//     //console.log(wallMap[xIndex][zIndex]);
+//     isWall = wallMap[zIndex][xIndex]
+//     console.log(isWall);
+//     return isWall;
+// }
+// var map = display(maze);
+// console.log(map);
+// wallMap = getWalls(map, 15);
+// var mapString = '';
+// for(i=0; i<61; i++) {
+//     mapString += '[' + i + ']: ';
+//     for(j=0; j<61; j++) {
+//         mapString += wallMap[i][j] + ' ';
+//     }
+//     console.log(mapString);
+//     mapString = '';
+// }

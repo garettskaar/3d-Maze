@@ -15,29 +15,35 @@
     <!-- define our shaders -->
     <script id="per-fragment-lighting-fs" type="x-shader/x-fragment">
     precision mediump float;
+
     varying vec2 vTextureCoord;
     varying vec3 vTransformedNormal;
     varying vec4 vPosition;
+
     uniform float uMaterialShininess;
     uniform vec3 uAmbientColor;
     uniform vec3 uPointLightingLocation;
     uniform vec3 uPointLightingSpecularColor;
     uniform vec3 uPointLightingDiffuseColor;
     uniform sampler2D uSampler;
+
     void main(void) {
         vec3 lightWeighting;
         vec4 fragmentColor;
         vec3 lightDirection = normalize(uPointLightingLocation - vPosition.xyz);
         vec3 normal = normalize(vTransformedNormal);
+
         float specularLightWeighting = 0.0;
         vec3 eyeDirection = normalize(-vPosition.xyz);
         vec3 reflectionDirection = reflect(-lightDirection, normal);
+
         specularLightWeighting = pow(max(dot(reflectionDirection, eyeDirection), 0.0), uMaterialShininess);
         float diffuseLightWeighting = max(dot(normal, lightDirection), 0.0);
         lightWeighting = uAmbientColor
                 + uPointLightingSpecularColor * specularLightWeighting
                 + uPointLightingDiffuseColor * diffuseLightWeighting;
        	fragmentColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
+
        	gl_FragColor = vec4(fragmentColor.rgb * lightWeighting, fragmentColor.a);
     }
     </script>
@@ -46,24 +52,30 @@
     attribute vec3 aVertexPosition;
     attribute vec3 aVertexNormal;
     attribute vec2 aTextureCoord;
+
     uniform mat4 uMVMatrix;
     uniform mat4 uPMatrix;
     uniform mat3 uNMatrix;
+
     uniform bool uUseBumpMap;
     uniform sampler2D uSampler;
+
     varying vec2 vTextureCoord;
     varying vec3 vTransformedNormal;
     varying vec4 vPosition;
+
     void main(void) {
         vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
         gl_Position = uPMatrix * vPosition;
         vTextureCoord = aTextureCoord;
 		vTransformedNormal = aVertexNormal;
+
 		//grabbing color for bump map
 		vec4 texColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
 		vec3 newColor = texColor.rgb;
 		float scalerRGB = sqrt((newColor[0]*newColor[0])+(newColor[1]*newColor[1])+(newColor[2]*newColor[2]));
 		scalerRGB = scalerRGB*4.0;
+
 		vTransformedNormal = scalerRGB*vTransformedNormal;
 		vTransformedNormal = uNMatrix * vTransformedNormal;
     }
@@ -76,6 +88,7 @@
     varying vec3 vLightWeighting;
     varying vec3 vTransformedNormal;
     varying vec4 vPosition;
+
 	uniform sampler2D uSampler;
     void main(void) {
 			vec4 textureColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
@@ -87,25 +100,31 @@
     attribute vec3 aVertexPosition;
     attribute vec3 aVertexNormal;
     attribute vec2 aTextureCoord;
+
     uniform mat4 uMVMatrix;
     uniform mat4 uPMatrix;
     uniform mat3 uNMatrix;
+
     uniform sampler2D uSampler;
     uniform vec3 uAmbientColor;
     uniform vec3 uLightingDirection;
     uniform vec3 uDirectionalColor;
+
     varying vec2 vTextureCoord;
     varying vec3 vLightWeighting;
     varying vec3 vNormalPosition;
+
     void main(void) {
         gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
         vTextureCoord = aTextureCoord;
 		vNormalPosition = aVertexNormal;
+
 		//grabbing color for bump map
 		vec4 texColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));
 		vec3 newColor = texColor.rgb;
 		float scalerRGB = sqrt((newColor[0]*newColor[0])+(newColor[1]*newColor[1])+(newColor[2]*newColor[2]));
 		scalerRGB = scalerRGB*4.0;
+
 		vNormalPosition = scalerRGB*vNormalPosition;
 		vec3 transformedNormal = uNMatrix * vNormalPosition;
         float directionalLightWeighting = max(dot(transformedNormal, uLightingDirection), 0.0);
@@ -232,17 +251,21 @@
         mat3.transpose(normalMatrix);
         gl.uniformMatrix3fv(currentProgram.nMatrixUniform, false, normalMatrix);
     }
-    //needs work yo
+    //This checks the future x and z postions of the camera to
+    //see if they are within 0.15 distance of a wall.
     function collisionCheck(xStep, zStep, xPos, zPos)
     {
+        //Futre positions we are checking
         xPos -= xStep;
         zPos -= zStep;
         var h = hCollision;
         var v = vCollision;
+        //valid collision booleans
         var horizontalColl = false;
         var verticalColl = false;
-        var block = 0.15;
-
+        //Distance from the wall the camera will stop at
+        var block = 0.16;
+        //Horizontal coordinates from maze generator
         for(i in h){
             var wall = h[i];
             if(xPos > wall.x - block && xPos < wall.x+ block + 1.0)
@@ -250,10 +273,10 @@
                 if(zPos > wall.z - block && zPos < wall.z + block)
                 {
                     horizontalColl = true;
-                    console.log("horizontal: "+horizontalColl);
                 }
             }
         }
+        //Vertical coordinates from maze generator
         for(i in v){
             var wall = v[i];
             if(zPos > wall.z - block && zPos < wall.z + 1.0 + block)
@@ -261,10 +284,12 @@
                if(xPos > wall.x - block && xPos < wall.x + block)
                {
                    verticalColl = true;
-                   console.log("vertical: "+verticalColl);
                }
             }
         }
+        //Used to implement smoother transition from a collision.
+        //Helps keep the camera from getting stuck.
+        //....... needs work :(
         if(verticalColl && horizontalColl)
         {
             return 3;
@@ -282,20 +307,7 @@
             return 0;
         }
     }
-    function collisionIndex(cX, cZ)
-    {
-        if(cX < -8.0 || cX > 7.0 || cZ < -8.0 || cZ > 7.0) {
-            return 0;
-        }
-        xIndex = Math.floor(((cX + 8.0)*61.0)/15.0);
-        zIndex = Math.floor(((cZ + 8.0)*61.0)/15.0);
-        //console.log('xIndex: ' + xIndex);
-        //console.log('zIndex: ' + zIndex);
-        //console.log(wallMap[xIndex][zIndex]);
-        isWall = wallMap[zIndex][xIndex]
-        console.log(isWall);
-        return isWall;
-    }
+
     // create and initialize our geometry objects
     var wallVertexPositionBuffer = null;
     var wallVertexTextureCoordBuffer = null;
@@ -305,9 +317,7 @@
     var sphereVertexNormalBuffer;
     var sphereVertexTextureCoordBuffer;
     var sphereVertexIndexBuffer;
-    var xCollision = [];
-    var zCollision = [];
-    var wallMap;
+
     function initGeometry() {
         var vertexPositions = [];
         var textureCoords = [];
@@ -316,26 +326,14 @@
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         maze = maze(15,15);
-        var map = display(maze);
-        console.log(map);
-        wallMap = getWalls(map, 15);
-        var mapString = '';
-        for(i=0; i<61; i++) {
-            mapString += '[' + i + ']: ';
-            for(j=0; j<61; j++) {
-                mapString += wallMap[i][j] + ' ';
-            }
-            console.log(mapString);
-            mapString = '';
-        }
+
         walls = buildMaze(maze);
         vertexPositions = walls.p;
         textureCoords = walls.t;
         normalPos = walls.p;
         hCollision = walls.h;
         vCollision = walls.v;
-        //console.log(xCollision.length);
-        //console.log(zCollision.length);
+
         wallVertexPositionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexPositionBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexPositions), gl.STATIC_DRAW);
@@ -506,7 +504,7 @@
     }
     function getViewMatrix()
     {
-        //sphere position
+        //camera position
         eye = [xPos,yPos+0.52,zPos];
         //initial location you look at
         initialD = [0.0,0.0,10];
@@ -532,8 +530,7 @@
     var vertical = 0;
     var speed = 0;
     function drawScene() {
-        //console.log("x pos: "+xPos+"\n");
-        //console.log("z pos: "+zPos+"\n");
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Scene
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -584,21 +581,22 @@
         //// Look At Matrix
         ///////////////////////
         mat4.rotate(mvMatrix, -horizontal, [0, 1, 0]);
+        //needs work, for looking up and down.
         //mat4.rotate(mvMatrix, -vertical, [1, 0, 0]);
         avm = getViewMatrix();
         mat4.multiply(mvMatrix,avm);
+
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, boxTexture);
         gl.uniform1i(currentProgram.samplerUniform, 0);
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexTextureCoordBuffer);
         gl.vertexAttribPointer(currentProgram.textureCoordAttribute, wallVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
-        //console.log("buffer tex size = "+wallVertexTextureCoordBuffer.numItems);
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexNormalBuffer);
         gl.vertexAttribPointer(currentProgram.vertexNormalAttribute, wallVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
         gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexPositionBuffer);
         gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, wallVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-        //console.log("buffer size = "+wallVertexPositionBuffer.numItems);
         setMatrixUniforms();
+
         gl.drawArrays(gl.TRIANGLES, 0, wallVertexPositionBuffer.numItems);
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, floorTexture);
@@ -614,6 +612,8 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Render Sky
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //The ball we were going to roll around has now become our sky and atmosphere.
         mat4.rotateY(mvMatrix, xRot / 180.0 * 3.1415);
         mat4.rotateZ(mvMatrix, xRot / 180.0 * 3.1415);
         gl.activeTexture(gl.TEXTURE0);
@@ -640,20 +640,30 @@
                 var xStep = Math.sin(horizontal) * speed * elapsed;
                 var zStep = Math.cos(horizontal) * speed * elapsed;
                 collision = collisionCheck(xStep,zStep, xPos, zPos);
-                if(collision != 0)
+                //Both H and V collisions
+                if(collision == 3)
                 {
                     xPos = xPos;
                     zPos = zPos;
                 }
+                //vertical collision
+                else if(collision == 2)
+                {
+                    xPos = xPos;
+                    zPos = zPos;
+                    //zPos += -zStep
+                }
+                //horizontal collision
+                else if(collision == 1)
+                {
+                    zPos = zPos;
+                    xPos = xPos;
+                    //xPos += -xStep
+                }
                 else
                 {
-                // if(collisionIndex(xPos - xStep,zPos - zStep) == 1){
-                //     xPos = xPos;
-                //     zPos = zPos;
-                // } else {
                     xPos -= xStep;
                     zPos -= zStep;
-                //}
                 }
             }
         }
