@@ -235,11 +235,52 @@
     //needs work yo
     function collisionCheck(xStep, zStep, xPos, zPos)
     {
-        h = hCollision;
-        v = vCollision;
-        xpos -= xStep;
-        zpos -= zStep;
+        xPos -= xStep;
+        zPos -= zStep;
+        var h = hCollision;
+        var v = vCollision;
+        var horizontalColl = false;
+        var verticalColl = false;
+        var block = 0.15;
 
+        for(i in h){
+            var wall = h[i];
+            if(xPos > wall.x - block && xPos < wall.x+ block + 1.0)
+            {
+                if(zPos > wall.z - block && zPos < wall.z + block)
+                {
+                    horizontalColl = true;
+                    console.log("horizontal: "+horizontalColl);
+                }
+            }
+        }
+        for(i in v){
+            var wall = v[i];
+            if(zPos > wall.z - block && zPos < wall.z + 1.0 + block)
+            {
+               if(xPos > wall.x - block && xPos < wall.x + block)
+               {
+                   verticalColl = true;
+                   console.log("vertical: "+verticalColl);
+               }
+            }
+        }
+        if(verticalColl && horizontalColl)
+        {
+            return 3;
+        }
+        else if(verticalColl && !horizontalColl)
+        {
+            return 2;
+        }
+        else if(!verticalColl && horizontalColl)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
     function collisionIndex(cX, cZ)
     {
@@ -598,22 +639,22 @@
             if (speed != 0) {
                 var xStep = Math.sin(horizontal) * speed * elapsed;
                 var zStep = Math.cos(horizontal) * speed * elapsed;
-                //collision = collisionCheck(xStep,zStep, xPos, zPos);
-                // if(collision)
-                // {
-                //     xPos = xPos;
-                //     zPos = zPos;
-                // }
-                // else
-                // {
-                if(collisionIndex(xPos - xStep,zPos - zStep) === 1){
+                collision = collisionCheck(xStep,zStep, xPos, zPos);
+                if(collision != 0)
+                {
                     xPos = xPos;
                     zPos = zPos;
-                } else {
+                }
+                else
+                {
+                // if(collisionIndex(xPos - xStep,zPos - zStep) == 1){
+                //     xPos = xPos;
+                //     zPos = zPos;
+                // } else {
                     xPos -= xStep;
                     zPos -= zStep;
-                }
                 //}
+                }
             }
         }
         lastTime = timeNow;
