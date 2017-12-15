@@ -10,9 +10,9 @@ var pitch = 0;
 var pitchRate = 0;
 var yaw = 90;
 var yawRate = 0;
-var xPos = 5.4;
+var xPos = -10.0;
 var yPos = 0.3;
-var zPos = 4.0;
+var zPos = -10.0;
 var speed = 0;
 
 var rotateXmax = 640;
@@ -54,10 +54,10 @@ var handleKeyUp = function (event)
 
 function handleKeys() {
     if (currentlyPressedKeys[87]) {
-        speed = 0.001;
+        speed = -0.001;
     }
     else if (currentlyPressedKeys[83]) {
-        speed = -0.001;
+        speed = 0.001;
     }
     else{
         speed = 0;

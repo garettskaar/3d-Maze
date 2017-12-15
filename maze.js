@@ -84,26 +84,55 @@ function display(m) {
 
 function getWalls(maze, s) {
     maze.trim();
-    var sizeH = s*4 + 3;
-    var sizeV = s*2 + 1;
-    var x = new Array(sizeV);
-    for (var i = 0; i < sizeV; i++) {
-        x[i] = new Array(sizeH);
+    var height = 61;
+    var width = 63; // add 2 for '\n'
+
+    var x = new Array(height);
+    for (var k = 0; k < height; k++) {
+        x[k] = new Array(width-2);
     }
 
-    for(var k=0; k<sizeV; k++){
-        for(var j=0; j<sizeH; j++) {
-            if(maze[k*sizeH + j] == '-' || maze[k*sizeH + j] == '|' || maze[k*sizeH + j] == '+'){
-                x[k][j] = 1;
+    var i = 0 //index of array
+    var c = 0 //index of strinified maze
+    while(i < height) {
+        if (i%4 === 0) {
+            for (var j = 0; j < width - 2; j++) {
+                if (maze[c * width + j] === '+' || maze[c * width + j] === '-') {
+                    x[i][j] = 1;
+                } else if(maze[c * width + j] == ' '){
+                    x[i][j] = 0;
+                }
             }
-            if(maze[k*sizeH + j] == ' '){
-                x[k][j] = 0;
+        } else {
+            for (var j = 0; j < width - 2; j++) {
+                if (maze[c * width + j] === '|') {
+                    x[i][j] = 1;
+                } else if(maze[c * width + j] === ' '){
+                    x[i][j] = 0;
+                }
+            }
+            i++
+            for (var j = 0; j < width - 2; j++) {
+                if (maze[c * width + j] === '|') {
+                    x[i][j] = 1;
+                } else if(maze[c * width + j] === ' '){
+                    x[i][j] = 0;
+                }
+            }
+            i++
+            for (var j = 0; j < width - 2; j++) {
+                if (maze[c * width + j] == '|') {
+                    x[i][j] = 1;
+                } else if(maze[c * width + j] === ' '){
+                    x[i][j] = 0;
+                }
             }
         }
+        i++;
+        c++;
     }
 
     return x;
-
 }
 
 var width = 1;
