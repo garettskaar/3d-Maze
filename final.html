@@ -10,6 +10,7 @@
     <script type="text/javascript" src="webgl-utils.js"></script>
     <script type="text/javascript" src="handlers.js"></script>
     <script type="text/javascript" src="mazeGenerator.js"></script>
+    <script type="text/javascript" src="cubeBuilder.js"></script>
 
 
     <!-- define our shaders -->
@@ -264,7 +265,7 @@
         var horizontalColl = false;
         var verticalColl = false;
         //Distance from the wall the camera will stop at
-        var block = 0.16;
+        var block = 0.17;
         //Horizontal coordinates from maze generator
         for(i in h){
             var wall = h[i];
@@ -309,6 +310,10 @@
     }
 
     // create and initialize our geometry objects
+    var cubeVertexPositionBuffer;
+    var cubeVertexNormalBuffer;
+    var cubeVertexTextureCoordBuffer;
+    var cubeVertexIndexBuffer;
     var wallVertexPositionBuffer = null;
     var wallVertexTextureCoordBuffer = null;
     var floorVertexPositionBuffer = null;
@@ -322,6 +327,41 @@
         var vertexPositions = [];
         var textureCoords = [];
         var normalPos = [];
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //  Initialize Cube Geometry
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        cubeFinish = getCube();
+        //finish cube
+        cubeVertexPositionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cubeFinish.v), gl.STATIC_DRAW);
+        cubeVertexPositionBuffer.itemSize = 3;
+        cubeVertexPositionBuffer.numItems = 24;
+
+        cubeVertexNormalBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexNormalBuffer);
+
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cubeFinish.n), gl.STATIC_DRAW);
+        cubeVertexNormalBuffer.itemSize = 3;
+        cubeVertexNormalBuffer.numItems = 24;
+
+        cubeVertexTextureCoordBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
+
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cubeFinish.t), gl.STATIC_DRAW);
+        cubeVertexTextureCoordBuffer.itemSize = 2;
+        cubeVertexTextureCoordBuffer.numItems = 24;
+
+        cubeVertexIndexBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeFinish.i), gl.STATIC_DRAW);
+        cubeVertexIndexBuffer.itemSize = 1;
+        cubeVertexIndexBuffer.numItems = 36;
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -353,7 +393,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Floor Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        var floorSize = 20.0;
+        var floorSize = 15.0;
         var floorPositions = [-floorSize, 0, -floorSize, -floorSize, 0, floorSize, floorSize, 0, floorSize, -floorSize, 0, -floorSize, floorSize, 0, -floorSize, floorSize, 0, floorSize];
         var floorTextureCoords = [0, floorSize, 0, 0, floorSize, 0, 0, floorSize, floorSize, floorSize, floorSize, 0];
         var floorNormals = [-floorSize, 1.0, -floorSize, -floorSize, 1.0, floorSize, floorSize, 1.0, floorSize, -floorSize, 1.0, -floorSize, floorSize, 1.0, -floorSize, floorSize, 1.0, floorSize];
@@ -441,7 +481,16 @@
     var exTexture;
     var floorTexture;
     var boxTexture;
+    var finishTexture;
     function initTextures() {
+
+        //finish cube
+        finishTexture = gl.createTexture();
+        finishTexture.image = new Image();
+        finishTexture.image.onload = function () {
+            handleLoadedTexture(finishTexture)
+        };
+        finishTexture.image.src = "finish.png";
         // Ball Texture
         exTexture = gl.createTexture();
         exTexture.image = new Image();
@@ -609,6 +658,30 @@
         gl.vertexAttribPointer(currentProgram.textureCoordAttribute, floorVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
         setMatrixUniforms();
         gl.drawArrays(gl.TRIANGLES, 0, floorVertexPositionBuffer.numItems);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //  Render Finish
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // mat4.translate(2,20,2);
+        //
+        // gl.activeTexture(gl.TEXTURE0);
+        // gl.bindTexture(gl.TEXTURE_2D, finishTexture);
+        // gl.uniform1i(currentProgram.samplerUniform, 0);
+        //
+        // gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
+        // gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        //
+        // gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexNormalBuffer);
+        // gl.vertexAttribPointer(currentProgram.vertexNormalAttribute, cubeVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        //
+        // gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
+        // gl.vertexAttribPointer(currentProgram.textureCoordAttribute, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        //
+        // gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
+        // setMatrixUniforms();
+        // gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Render Sky
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -628,6 +701,9 @@
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, sphereVertexIndexBuffer);
         setMatrixUniforms();
         gl.drawElements(gl.TRIANGLES, sphereVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+
+
+
     }
     var lastTime = 0;
     function animate() {
@@ -685,12 +761,15 @@
 <body onload="startHelloWebGL()">
 <h1>Final Project: Maze</h1>
 
+
 <!-- embed the HTML5 Canvas Drawing object on the page.-->
 <!-- Name the canvas 'hellowebgl' for the javascript code. -->
-<canvas id="hellowebgl" width=1024 height=1024>
+<canvas id="hellowebgl" width=1020 height=800>
     If you're seeing this your web browser doesn't support the &lt;canvas>&gt; element. Ouch!
 </canvas>
 <br/>
+Use W for Forward.   Use D for Backward<br>
+<br> Click and Drag Left or Right to turn.</br><br>
 
 Author: Garett Skaar & Jordin Rausch
 <br/>
