@@ -14,11 +14,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="mazeGenerator.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-4041">
+              <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="final.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/final.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="771" column="42" lean-forward="false" selection-start-line="771" selection-start-column="42" selection-end-line="771" selection-end-column="42" />
+            <state relative-caret-position="518">
+              <caret line="770" column="26" lean-forward="false" selection-start-line="770" selection-start-column="26" selection-end-line="770" selection-end-column="26" />
               <folding>
                 <element signature="e#33499#33503#0" expanded="true" />
                 <element signature="e#33510#33514#0" expanded="true" />
@@ -159,12 +169,12 @@
       <workItem from="1513282558224" duration="106000" />
       <workItem from="1513282678907" duration="33000" />
       <workItem from="1513282730399" duration="3552000" />
-      <workItem from="1513339242955" duration="11343000" />
+      <workItem from="1513339242955" duration="12550000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24678000" />
+    <option name="totallyTimeSpent" value="25885000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="134" y="29" width="1737" height="947" extended-state="0" />
@@ -437,14 +447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="81" column="25" lean-forward="false" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/handlers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-267">
@@ -461,10 +463,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4041">
+          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/final.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="771" column="42" lean-forward="false" selection-start-line="771" selection-start-column="42" selection-end-line="771" selection-end-column="42" />
+        <state relative-caret-position="518">
+          <caret line="770" column="26" lean-forward="false" selection-start-line="770" selection-start-column="26" selection-end-line="770" selection-end-column="26" />
           <folding>
             <element signature="e#33499#33503#0" expanded="true" />
             <element signature="e#33510#33514#0" expanded="true" />
