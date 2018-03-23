@@ -328,39 +328,6 @@
         var textureCoords = [];
         var normalPos = [];
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //  Initialize Cube Geometry
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        cubeFinish = getCube();
-        //finish cube
-        cubeVertexPositionBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
-
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cubeFinish.v), gl.STATIC_DRAW);
-        cubeVertexPositionBuffer.itemSize = 3;
-        cubeVertexPositionBuffer.numItems = 24;
-
-        cubeVertexNormalBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexNormalBuffer);
-
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cubeFinish.n), gl.STATIC_DRAW);
-        cubeVertexNormalBuffer.itemSize = 3;
-        cubeVertexNormalBuffer.numItems = 24;
-
-        cubeVertexTextureCoordBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
-
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(cubeFinish.t), gl.STATIC_DRAW);
-        cubeVertexTextureCoordBuffer.itemSize = 2;
-        cubeVertexTextureCoordBuffer.numItems = 24;
-
-        cubeVertexIndexBuffer = gl.createBuffer();
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
-
-        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeFinish.i), gl.STATIC_DRAW);
-        cubeVertexIndexBuffer.itemSize = 1;
-        cubeVertexIndexBuffer.numItems = 36;
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Wall Geometry
@@ -484,13 +451,6 @@
     var finishTexture;
     function initTextures() {
 
-        //finish cube
-        finishTexture = gl.createTexture();
-        finishTexture.image = new Image();
-        finishTexture.image.onload = function () {
-            handleLoadedTexture(finishTexture)
-        };
-        finishTexture.image.src = "finish.png";
         // Ball Texture
         exTexture = gl.createTexture();
         exTexture.image = new Image();
@@ -660,29 +620,6 @@
         gl.drawArrays(gl.TRIANGLES, 0, floorVertexPositionBuffer.numItems);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //  Render Finish
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-        // mat4.translate(2,20,2);
-        //
-        // gl.activeTexture(gl.TEXTURE0);
-        // gl.bindTexture(gl.TEXTURE_2D, finishTexture);
-        // gl.uniform1i(currentProgram.samplerUniform, 0);
-        //
-        // gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
-        // gl.vertexAttribPointer(currentProgram.vertexPositionAttribute, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-        //
-        // gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexNormalBuffer);
-        // gl.vertexAttribPointer(currentProgram.vertexNormalAttribute, cubeVertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
-        //
-        // gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
-        // gl.vertexAttribPointer(currentProgram.textureCoordAttribute, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
-        //
-        // gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeVertexIndexBuffer);
-        // setMatrixUniforms();
-        // gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Render Sky
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -759,7 +696,7 @@
 <!-- the onload attribute specifies a javascript function to execute when the body tag is loaded into the browser -->
 
 <body onload="startHelloWebGL()">
-<h1>Final Project: Maze</h1>
+<h1>WebGL 3D Maze</h1>
 
 
 <!-- embed the HTML5 Canvas Drawing object on the page.-->
