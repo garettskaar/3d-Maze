@@ -17,37 +17,20 @@
       <file leaf-file-name="mazeGenerator.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2380">
-              <caret line="140" column="29" lean-forward="true" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
+            <state relative-caret-position="170">
+              <caret line="10" column="16" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="final.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/final.html">
+      <file leaf-file-name="Main.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="714" column="0" lean-forward="false" selection-start-line="714" selection-start-column="0" selection-end-line="714" selection-end-column="54" />
-              <folding>
-                <element signature="e#30337#30341#0" expanded="true" />
-                <element signature="e#30348#30352#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="340">
+              <caret line="470" column="41" lean-forward="false" selection-start-line="470" selection-start-column="41" selection-end-line="470" selection-end-column="41" />
+              <folding />
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="brick2.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/brick2.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="floortile.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/floortile.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
           </provider>
         </entry>
       </file>
@@ -105,6 +88,7 @@
         <option value="$PROJECT_DIR$/mazeGenerator.js" />
         <option value="$PROJECT_DIR$/final.html" />
         <option value="$PROJECT_DIR$/handlers.js" />
+        <option value="$PROJECT_DIR$/Main.html" />
       </list>
     </option>
   </component>
@@ -114,7 +98,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="134" />
     <option name="y" value="29" />
     <option name="width" value="1737" />
@@ -190,15 +174,15 @@
       <workItem from="1514326270915" duration="263000" />
       <workItem from="1517261520604" duration="112000" />
       <workItem from="1517261820998" duration="214000" />
-      <workItem from="1521833993793" duration="1165000" />
+      <workItem from="1521833993793" duration="1605000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28832000" />
+    <option name="totallyTimeSpent" value="29272000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -231,14 +215,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/handlers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1003">
@@ -261,10 +237,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13090">
           <caret line="770" column="26" lean-forward="false" selection-start-line="770" selection-start-column="26" selection-end-line="770" selection-end-column="26" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -288,10 +261,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
           <caret line="318" column="8" lean-forward="false" selection-start-line="318" selection-start-column="8" selection-end-line="318" selection-end-column="8" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -299,10 +269,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -318,10 +285,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -347,10 +311,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12750">
           <caret line="750" column="20" lean-forward="false" selection-start-line="750" selection-start-column="20" selection-end-line="750" selection-end-column="20" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -491,10 +452,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3346">
           <caret line="558" column="40" lean-forward="true" selection-start-line="537" selection-start-column="5" selection-end-line="558" selection-end-column="40" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -519,14 +477,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2380">
-          <caret line="140" column="29" lean-forward="true" selection-start-line="140" selection-start-column="29" selection-end-line="140" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cubeBuilder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1297">
@@ -539,10 +489,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="760">
           <caret line="714" column="0" lean-forward="false" selection-start-line="714" selection-start-column="0" selection-end-line="714" selection-end-column="54" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="16" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="470" column="41" lean-forward="false" selection-start-line="470" selection-start-column="41" selection-end-line="470" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>

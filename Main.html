@@ -310,10 +310,7 @@
     }
 
     // create and initialize our geometry objects
-    var cubeVertexPositionBuffer;
-    var cubeVertexNormalBuffer;
-    var cubeVertexTextureCoordBuffer;
-    var cubeVertexIndexBuffer;
+
     var wallVertexPositionBuffer = null;
     var wallVertexTextureCoordBuffer = null;
     var floorVertexPositionBuffer = null;
@@ -457,21 +454,21 @@
         exTexture.image.onload = function () {
             handleLoadedTexture(exTexture)
         };
-        exTexture.image.src = "redsky.png";
+        exTexture.image.src = "Textures/redsky.png";
         // Floor Texture
         floorTexture = gl.createTexture();
         floorTexture.image = new Image();
         floorTexture.image.onload = function () {
             handleLoadedTextureNoMips(floorTexture)
         };
-        floorTexture.image.src = "floortile.png";
+        floorTexture.image.src = "Textures/floortile.png";
         // Floor Texture
         boxTexture = gl.createTexture();
         boxTexture.image = new Image();
         boxTexture.image.onload = function () {
             handleLoadedTextureNoMips(boxTexture)
         };
-        boxTexture.image.src = "brick2.png";
+        boxTexture.image.src = "Textures/brick2.png";
     }
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
