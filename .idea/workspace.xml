@@ -24,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="final.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="final.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/final.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="699" column="0" lean-forward="true" selection-start-line="699" selection-start-column="0" selection-end-line="699" selection-end-column="0" />
+            <state relative-caret-position="760">
+              <caret line="714" column="0" lean-forward="false" selection-start-line="714" selection-start-column="0" selection-end-line="714" selection-end-column="54" />
               <folding>
                 <element signature="e#30337#30341#0" expanded="true" />
                 <element signature="e#30348#30352#0" expanded="true" />
@@ -63,7 +63,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cubeBuilder.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cubeBuilder.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cubeBuilder.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1297">
@@ -114,7 +114,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="134" />
     <option name="y" value="29" />
     <option name="width" value="1737" />
@@ -190,15 +190,15 @@
       <workItem from="1514326270915" duration="263000" />
       <workItem from="1517261520604" duration="112000" />
       <workItem from="1517261820998" duration="214000" />
-      <workItem from="1521833993793" duration="521000" />
+      <workItem from="1521833993793" duration="1081000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28188000" />
+    <option name="totallyTimeSpent" value="28748000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.140625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -519,17 +519,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/final.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="699" column="0" lean-forward="true" selection-start-line="699" selection-start-column="0" selection-end-line="699" selection-end-column="0" />
-          <folding>
-            <element signature="e#30337#30341#0" expanded="true" />
-            <element signature="e#30348#30352#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mazeGenerator.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2380">
@@ -543,6 +532,17 @@
         <state relative-caret-position="-1297">
           <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/final.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="714" column="0" lean-forward="false" selection-start-line="714" selection-start-column="0" selection-end-line="714" selection-end-column="54" />
+          <folding>
+            <element signature="e#30337#30341#0" expanded="true" />
+            <element signature="e#30348#30352#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
