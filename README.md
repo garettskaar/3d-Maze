@@ -14,4 +14,5 @@ through the web browser, and efficiently draws 3D geometery.
 ## Sources used
 
 http://learningwebgl.com/blog/
+
 http://rosettacode.org/wiki/Maze_generation#JavaScript
