@@ -26,71 +26,70 @@ mat4.identity(rotMatrix);
 
 //mouse event variables
 var mouseDownP = false;
-var lastMouseX = null;
-var lastMouseY = null;
+lastMouseX = null;
+lastMouseY = null;
 var deltaX = 0;
-var currentlyPressedKeys = {};
+currentlyPressedKeys = {};
 
-//degrees to radains
-function degToRad(deg){
+//degrees to radians
+function degToRad(deg)
+{
     return (deg*Math.PI/180);
 }
-function reset(x) {
+
+function reset(x)
+{
     if (x>0) return 1;
     else if (x<0) return -1;
     else return 0;
 }
+
 //move functionality
 var handleKeyDown = function (event)
 {
     currentlyPressedKeys[event.keyCode] = true;
-}
+};
 
 var handleKeyUp = function (event)
 {
     currentlyPressedKeys[event.keyCode] = false;
-}
+};
 
-function handleKeys() {
-    if (currentlyPressedKeys[87]) {
+function handleKeys()
+{
+    if (currentlyPressedKeys[87])
         speed = -0.001;
-    }
-    else if (currentlyPressedKeys[83]) {
+    else if (currentlyPressedKeys[83])
         speed = 0.001;
-    }
-    else{
+    else
         speed = 0;
-    }
 }
 
 var handleMouseDown = function (event)
 {
     mouseDownP = true;
     speed = 0;
-}
+};
+
 var handleMouseUp = function (event)
 {
     lastMouseX = event.clientX;
     lastMouseY = event.clientY;
     mouseDownP = false;
-}
-var handleMouseMove = function (event) {
+};
 
-
+var handleMouseMove = function (event)
+{
     var newX = event.clientX;
     var newY = event.clientY;
 
-    if (lastMouseX != 0 && mouseDownP)
+    if (lastMouseX !== 0 && mouseDownP)
     {
-
-        if((newY - lastMouseY) > 0)
-        {
-            speed = -0.003
-        }
-        else if((newY - lastMouseY) < 0)
-        {
+        if ((newY - lastMouseY) > 0)
+            speed = -0.003;
+        else if ((newY - lastMouseY) < 0)
             speed = 0.003;
-        }
+
         //This uses canvas size for smooth movement
         horizontal -= (newX - lastMouseX) / (rotateXmax / 6);
         vertical -= (newY - lastMouseY) / (rotateYmax / 3);
@@ -101,4 +100,4 @@ var handleMouseMove = function (event) {
 
     lastMouseX = newX;
     lastMouseY = newY;
-}
+};

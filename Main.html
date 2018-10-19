@@ -256,60 +256,55 @@
     //see if they are within 0.15 distance of a wall.
     function collisionCheck(xStep, zStep, xPos, zPos)
     {
-        //Futre positions we are checking
+        //Future positions we are checking
         xPos -= xStep;
         zPos -= zStep;
-        var h = hCollision;
-        var v = vCollision;
+        let h = hCollision;
+        let v = vCollision;
+
         //valid collision booleans
-        var horizontalColl = false;
-        var verticalColl = false;
+        let horizontalColl = false;
+        let verticalColl = false;
+
         //Distance from the wall the camera will stop at
-        var block = 0.17;
+        const block = 0.17;
+
         //Horizontal coordinates from maze generator
-        for(i in h){
-            var wall = h[i];
-            if(xPos > wall.x - block && xPos < wall.x+ block + 1.0)
-            {
-                if(zPos > wall.z - block && zPos < wall.z + block)
-                {
+        h.forEach(function (element) {
+            let wall = element;
+            if (xPos > wall.x - block && xPos < wall.x + block + 1.0) {
+                if (zPos > wall.z - block && zPos < wall.z + block) {
                     horizontalColl = true;
                 }
             }
-        }
+        });
+
         //Vertical coordinates from maze generator
-        for(i in v){
-            var wall = v[i];
-            if(zPos > wall.z - block && zPos < wall.z + 1.0 + block)
-            {
-               if(xPos > wall.x - block && xPos < wall.x + block)
-               {
-                   verticalColl = true;
-               }
+        v.forEach(function (element) {
+            let wall = element;
+            if (zPos > wall.z - block && zPos < wall.z + 1.0 + block) {
+                if (xPos > wall.x - block && xPos < wall.x + block) {
+                    verticalColl = true;
+                }
             }
-        }
+        });
+
         //Used to implement smoother transition from a collision.
         //Helps keep the camera from getting stuck.
         //....... needs work :(
         if(verticalColl && horizontalColl)
-        {
             return 3;
-        }
         else if(verticalColl && !horizontalColl)
-        {
             return 2;
-        }
         else if(!verticalColl && horizontalColl)
-        {
             return 1;
-        }
         else
-        {
             return 0;
-        }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // create and initialize our geometry objects
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var wallVertexPositionBuffer = null;
     var wallVertexTextureCoordBuffer = null;
@@ -325,13 +320,13 @@
         var textureCoords = [];
         var normalPos = [];
 
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Wall Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         maze = maze(15,15);
 
-        walls = buildMaze(maze);
+        let walls = buildMaze(maze);
         vertexPositions = walls.p;
         textureCoords = walls.t;
         normalPos = walls.p;
@@ -354,9 +349,11 @@
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normalPos), gl.STATIC_DRAW);
         wallVertexNormalBuffer.itemSize = 3;
         wallVertexNormalBuffer.numItems = normalPos.length / 3;
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Floor Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         var floorSize = 15.0;
         var floorPositions = [-floorSize, 0, -floorSize, -floorSize, 0, floorSize, floorSize, 0, floorSize, -floorSize, 0, -floorSize, floorSize, 0, -floorSize, floorSize, 0, floorSize];
         var floorTextureCoords = [0, floorSize, 0, 0, floorSize, 0, 0, floorSize, floorSize, floorSize, floorSize, 0];
@@ -376,28 +373,36 @@
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(floorNormals), gl.STATIC_DRAW);
         floorVertexNormalBuffer.itemSize = 3;
         floorVertexNormalBuffer.numItems = floorNormals.length / 3;
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Sphere Geometry
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         var latitudeBands = 20;
         var longitudeBands = 20;
         var radius = 40.0;
         var vertexPositionData = [];
         var normalData = [];
         var textureCoordData = [];
-        for (var latNumber = 0; latNumber <= latitudeBands; latNumber++) {
-            var theta = latNumber * Math.PI / latitudeBands;
-            var sinTheta = Math.sin(theta);
-            var cosTheta = Math.cos(theta);
-            for (var longNumber = 0; longNumber <= longitudeBands; longNumber++) {
-                var phi = longNumber * 2 * Math.PI / longitudeBands;
-                var sinPhi = Math.sin(phi);
-                var cosPhi = Math.cos(phi);
-                var x = cosPhi * sinTheta;
-                var y = cosTheta;
-                var z = sinPhi * sinTheta;
-                var u = 1 - (longNumber / longitudeBands);
-                var v = 1 - (latNumber / latitudeBands);
+        let latNumber;
+        let longNumber;
+
+        for (latNumber = 0; latNumber <= latitudeBands; latNumber++)
+        {
+            let theta = latNumber * Math.PI / latitudeBands;
+            let sinTheta = Math.sin(theta);
+            let cosTheta = Math.cos(theta);
+
+            for (longNumber = 0; longNumber <= longitudeBands; longNumber++)
+            {
+                let phi = longNumber * 2 * Math.PI / longitudeBands;
+                let sinPhi = Math.sin(phi);
+                let cosPhi = Math.cos(phi);
+                let x = cosPhi * sinTheta;
+                let y = cosTheta;
+                let z = sinPhi * sinTheta;
+                let u = 1 - (longNumber / longitudeBands);
+                let v = 1 - (latNumber / latitudeBands);
                 normalData.push(-x);
                 normalData.push(-y);
                 normalData.push(-z);
@@ -408,11 +413,14 @@
                 vertexPositionData.push(radius * z);
             }
         }
-        var indexData = [];
-        for (var latNumber = 0; latNumber < latitudeBands; latNumber++) {
-            for (var longNumber = 0; longNumber < longitudeBands; longNumber++) {
-                var first = (latNumber * (longitudeBands + 1)) + longNumber;
-                var second = first + longitudeBands + 1;
+
+        let indexData = [];
+        for (latNumber = 0; latNumber < latitudeBands; latNumber++)
+        {
+            for (longNumber = 0; longNumber < longitudeBands; longNumber++)
+            {
+                let first = (latNumber * (longitudeBands + 1)) + longNumber;
+                let second = first + longitudeBands + 1;
                 indexData.push(first);
                 indexData.push(second);
                 indexData.push(first + 1);
@@ -421,6 +429,7 @@
                 indexData.push(first + 1);
             }
         }
+
         sphereVertexNormalBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, sphereVertexNormalBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normalData), gl.STATIC_DRAW);
@@ -442,6 +451,7 @@
         sphereVertexIndexBuffer.itemSize = 1;
         sphereVertexIndexBuffer.numItems = indexData.length;
     }
+
     var exTexture;
     var floorTexture;
     var boxTexture;
@@ -470,6 +480,7 @@
         };
         boxTexture.image.src = "Textures/brick2.png";
     }
+
     function handleLoadedTexture(texture) {
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -479,6 +490,7 @@
         gl.generateMipmap(gl.TEXTURE_2D);
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
+
     function handleLoadedTextureNoMips(texture) {
         gl.bindTexture(gl.TEXTURE_2D, texture);
         gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -487,6 +499,7 @@
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
         gl.bindTexture(gl.TEXTURE_2D, null);
     }
+
     //Initialize everything for starting up a simple webGL application
     function startHelloWebGL() {
         // attach 'Handler' functions to handle events generated by the canvas.
@@ -508,6 +521,7 @@
         // Draw the Scene
         Frames();
     }
+
     function getViewMatrix()
     {
         //camera position
@@ -522,6 +536,7 @@
         viewMatrix = mat4.lookAt(eye,target,up);
         return viewMatrix;
     }
+
     // This function draws a basic webGL scene
     // first it clears the framebuffer.
     // then we define our View positions for our camera using WebGL matrices.
@@ -540,6 +555,7 @@
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Initialize Scene
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         //make sure the maze is there.
@@ -551,9 +567,11 @@
         //currentProgram = directionalProgram;
         currentProgram = perFragmentProgram;
         gl.useProgram(currentProgram);
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Se up Lighting
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         gl.uniform3f(
             currentProgram.ambientColorUniform,0.5,0.5,0.5
         );
@@ -573,20 +591,28 @@
         //light location
         gl.uniform3f(currentProgram.pointLightingLocationUniform, 2.0, 8.0, 1.0);
         //gl.uniform3f(currentProgram.pointLightingLocationUniform, xPos, yPos+10.0, zPos);
+
         //specular light value
         gl.uniform3f(currentProgram.pointLightingSpecularColorUniform, 0.8, 0.8, 0.8);
-        //diffues light color
+
+        //diffuse light color
         gl.uniform3f(currentProgram.pointLightingDiffuseColorUniform, 0.8, 0.8, 0.8);
+
         //shininess of specular light reflection
         gl.uniform1f(currentProgram.materialShininessUniform, 16.0);
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //  Render Floor and Walls
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         mat4.identity(mvMatrix);
+
         ///////////////////////
         //// Look At Matrix
         ///////////////////////
+
         mat4.rotate(mvMatrix, -horizontal, [0, 1, 0]);
+
         //needs work, for looking up and down.
         //mat4.rotate(mvMatrix, -vertical, [1, 0, 0]);
         avm = getViewMatrix();
@@ -639,39 +665,24 @@
 
 
     }
-    var lastTime = 0;
+
+    let lastTime = 0;
     function animate() {
-        var timeNow = new Date().getTime();
-        if (lastTime != 0) {
-            var elapsed = timeNow - lastTime;
-            //handles movement and direction changeww
-            xRot += (elapsed/1000);
-            if (speed != 0) {
-                var xStep = Math.sin(horizontal) * speed * elapsed;
-                var zStep = Math.cos(horizontal) * speed * elapsed;
-                collision = collisionCheck(xStep,zStep, xPos, zPos);
+        let timeNow = new Date().getTime();
+
+        if (lastTime === 0) {
+        } else {
+            let elapsed = timeNow - lastTime;
+
+            //handles movement and direction change
+            xRot += (elapsed / 1000);
+            if (speed !== 0) {
+                let xStep = Math.sin(horizontal) * speed * elapsed;
+                let zStep = Math.cos(horizontal) * speed * elapsed;
+                let collision = collisionCheck(xStep, zStep, xPos, zPos);
+
                 //Both H and V collisions
-                if(collision == 3)
-                {
-                    xPos = xPos;
-                    zPos = zPos;
-                }
-                //vertical collision
-                else if(collision == 2)
-                {
-                    xPos = xPos;
-                    zPos = zPos;
-                    //zPos += -zStep
-                }
-                //horizontal collision
-                else if(collision == 1)
-                {
-                    zPos = zPos;
-                    xPos = xPos;
-                    //xPos += -xStep
-                }
-                else
-                {
+                if (!(collision <= 3 && collision >= 1)) {
                     xPos -= xStep;
                     zPos -= zStep;
                 }
@@ -679,6 +690,7 @@
         }
         lastTime = timeNow;
     }
+
     function Frames() {
         requestAnimFrame(Frames);
         handleKeys();
@@ -701,13 +713,19 @@
 <canvas id="hellowebgl" width=1020 height=800>
     If you're seeing this your web browser doesn't support the &lt;canvas>&gt; element. Ouch!
 </canvas>
-<br/>
-Use W for Forward.   Use S for Backward<br>
-<br> Click and Drag Left or Right to turn.</br><br>
 
-Author: Garett Skaar & Jordin Rausch
-<br/>
-Sources used:<br>
-http://learningwebgl.com/blog/<br>
-http://rosettacode.org/wiki/Maze_generation#JavaScript
-<br/>
+<h2>Controls:</h2>
+<ul>
+    <li>Use W for Forward</li>
+    <li>Use S for Backward</li>
+    <li>Click and Drag Left or Right to turn</li>
+</ul>
+
+<h2>Credits:</h2>
+    <strong>Authors:</strong> Garett Skaar & Jordin Rausch<br>
+    <strong>Sources:</strong>
+    <ul>
+        <li>http://learningwebgl.com/blog/</li>
+        <li>http://rosettacode.org/wiki/Maze_generation#JavaScript</li>
+    </ul>
+</body>
