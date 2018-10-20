@@ -115,9 +115,8 @@ var setupWebGL = function(canvas, opt_attribs, opt_onError) {
       }
       container.innerHTML = makeFailHTML(str);
     }
-  };
-
-  opt_onError = opt_onError || handleCreationError;
+  }
+    opt_onError = opt_onError || handleCreationError;
 
   if (canvas.addEventListener) {
     canvas.addEventListener("webglcontextcreationerror", function(event) {
