@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90b2ee9e-3264-444e-bc63-24962aea5b53" name="Default" comment="Playing around. Cleaned up some of the code.">
+    <list default="true" id="90b2ee9e-3264-444e-bc63-24962aea5b53" name="Default" comment="Fixing warnings.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JSFiles/webgl-utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/JSFiles/webgl-utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JSFiles/mazeGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/JSFiles/mazeGenerator.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,29 +27,29 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="glsl" value="2" />
-          <entry key="js" value="2" />
+          <entry key="js" value="3" />
           <entry key="md" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="GLSL shader file" value="2" />
-          <entry key="JavaScript" value="2" />
+          <entry key="JavaScript" value="3" />
           <entry key="Markdown" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="481" />
-          <entry key="js" value="38" />
-          <entry key="txt" value="45" />
+          <entry key="js" value="50" />
+          <entry key="txt" value="63" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="481" />
-          <entry key="JavaScript" value="38" />
-          <entry key="PLAIN_TEXT" value="45" />
+          <entry key="JavaScript" value="50" />
+          <entry key="PLAIN_TEXT" value="63" />
         </counts>
       </usages-collector>
     </session>
@@ -60,7 +59,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
+            <state relative-caret-position="-1932">
               <caret line="568" column="8" selection-start-line="568" selection-start-column="8" selection-end-line="568" selection-end-column="8" />
               <folding>
                 <element signature="n#script#5;n#head#0;n#html#0;n#!!top" />
@@ -73,10 +72,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/JSFiles/mazeGenerator.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="245">
+              <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/JSFiles/webgl-utils.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="117" column="3" lean-forward="true" selection-start-line="117" selection-start-column="3" selection-end-line="117" selection-end-column="3" />
+            <state relative-caret-position="112">
+              <caret line="113" column="29" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
@@ -145,6 +153,7 @@
         <option value="$PROJECT_DIR$/JSFiles/handlers.js" />
         <option value="$PROJECT_DIR$/Main.html" />
         <option value="$PROJECT_DIR$/JSFiles/webgl-utils.js" />
+        <option value="$PROJECT_DIR$/JSFiles/mazeGenerator.js" />
       </list>
     </option>
   </component>
@@ -194,7 +203,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540010717739" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1540011820361" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -236,7 +245,7 @@
       <workItem from="1517261820998" duration="214000" />
       <workItem from="1521833993793" duration="2104000" />
       <workItem from="1539919431679" duration="4403000" />
-      <workItem from="1539923931289" duration="3685000" />
+      <workItem from="1539923931289" duration="4774000" />
     </task>
     <task id="LOCAL-00001" summary="Playing around. Cleaned up some of the code.">
       <created>1539923632585</created>
@@ -245,11 +254,18 @@
       <option name="project" value="LOCAL" />
       <updated>1539923632585</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixing warnings.">
+      <created>1540010825022</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1540010825023</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37859000" />
+    <option name="totallyTimeSpent" value="38948000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -272,10 +288,10 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49928468" visible="true" weight="0.32168674" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49928468" weight="0.32168674" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.28674698" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007153" side_tool="true" weight="0.5914127" />
-      <window_info anchor="bottom" id="Inspection Results" order="11" weight="0.32963988" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" order="11" visible="true" weight="0.32891566" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -323,7 +339,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Playing around. Cleaned up some of the code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Playing around. Cleaned up some of the code." />
+    <MESSAGE value="Fixing warnings." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixing warnings." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Shaders_A4_12Face.html" />
@@ -358,9 +375,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/JSFiles/webgl-utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="113" column="29" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
+        <state relative-caret-position="-1932">
           <caret line="568" column="8" selection-start-line="568" selection-start-column="8" selection-end-line="568" selection-end-column="8" />
           <folding>
             <element signature="n#script#5;n#head#0;n#html#0;n#!!top" />
@@ -371,15 +400,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/JSFiles/webgl-utils.js">
+    <entry file="file://$PROJECT_DIR$/JSFiles/mazeGenerator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="117" column="3" lean-forward="true" selection-start-line="117" selection-start-column="3" selection-end-line="117" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="245">
+          <caret line="68" column="26" lean-forward="true" selection-start-line="68" selection-start-column="26" selection-end-line="68" selection-end-column="26" />
         </state>
       </provider>
     </entry>
