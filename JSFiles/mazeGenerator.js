@@ -24,7 +24,7 @@ function maze(x, y) {
 
     for (j = 0; j < x + 2; j++) {
         unvisited[j] = [];
-        for (var k = 0; k < y + 1; k++)
+        for (let k = 0; k < y + 1; k++)
             unvisited[j].push(j > 0 && j < x + 1 && k > 0 && (j !== here[0] + 1 || k !== here[1] + 1));
     }
 
@@ -50,8 +50,9 @@ function maze(x, y) {
             else
                 verti[(next[0] + here[0] - 1) / 2][next[1]] = true;
             path.push(here = next);
-        } else
+        } else {
             here = path.pop();
+        }
     }
 
     //returns a maze object with x y dimensions, and horizontal and vertical pathways (2D arrays of boolean values)..
@@ -64,8 +65,8 @@ function maze(x, y) {
 function display(m) {
     let text = [];
     let k;
-    for (var j = 0; j < m.x * 2 + 1; j++) {
-        var line = [];
+    for (let j = 0; j < m.x * 2 + 1; j++) {
+        let line = [];
         if (0 === j % 2) {
             let k;
             for (k = 0; k < m.y * 4 + 1; k++)
@@ -105,6 +106,7 @@ function pushHorizontalVerticies(vertexPositions, x, y, z) {
         x + width, y, z
     );
 }
+
 function pushHorizontalTexCoords(vertexTextureCoords){
     vertexTextureCoords.push(
         0.0, height,
@@ -115,6 +117,7 @@ function pushHorizontalTexCoords(vertexTextureCoords){
         width, 0.0
         );
 }
+
 function pushVerticalVerticies(vertexPositions, x, y, z) {
     //console.log("coordVerti: ("+x+", "+z+")\t("+x+", "+(z+width)+")\n");
     vertexPositions.push(
@@ -126,6 +129,7 @@ function pushVerticalVerticies(vertexPositions, x, y, z) {
         x, y, z + width
     );
 }
+
 function pushVerticalTexCoords(vertexTextureCoords){
     vertexTextureCoords.push(
         0.0, height,
